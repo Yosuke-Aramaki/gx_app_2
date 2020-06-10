@@ -1,6 +1,9 @@
 <h1>TODOアプリ</h1>
 <% if logged_in? %>
-  <%= render 'major_tasks/logged_in' %>
+  <h2>タスク一覧</h2>
+  <%= link_to "ログアウト", logout_path, method: :delete %> 
 <% else %>
-  <%= render 'major_tasks/not_logged_in' %>
+  <p>タスクの管理ができるアプリです。まずはSign up / ログインをしてください。</p>
+  <%= link_to "Sign up", new_user_path %>
+  <%= link_to "ログイン", login_path%>
 <% end %>
