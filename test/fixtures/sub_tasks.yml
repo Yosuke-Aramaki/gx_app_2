@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  text: MyString
+  start_date: 2020-06-11
+  end_date: 2020-06-11
+  time_duration: 1.5
+  major_task: one
+
+two:
+  text: MyString
+  start_date: 2020-06-11
+  end_date: 2020-06-11
+  time_duration: 1.5
+  major_task: two
