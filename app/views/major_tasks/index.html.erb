@@ -55,7 +55,7 @@
             </div>
           <% end %>
         </div>
-        <div>
+        <div id='subTaskForm<%= major_task.id %>' style='display: none;'>
           <%= form_for ([MajorTask.find(major_task.id), MajorTask.find(major_task.id).sub_tasks.build]) do |f| %>
             <p>
               <%= f.text_field :text, placeholder: '中タスク' %>
@@ -74,18 +74,12 @@
             </p>
           <% end %>
         </div>
-        <p id="show-sub-task-form">
-          <input type="button" value="+"
-            onClick=
-              "document.getElementById('sub-task-form').style.display = 'block'; 
-                document.getElementById('no-show-sub-task-form').style.display = 'block';
-                document.getElementById('show-sub-task-form').style.display = 'none';"></p>
-        <p id="no-show-sub-task-form" style="display: none;">
+        <p id="showSubTaskForm<%= major_task.id%>">
+        <input type="button" value="+"
+          onClick='showSubtask(<%= major_task.id %>)'></p>
+        <p id="hideSubTaskForm<%= major_task.id %>" style="display: none;">
           <input type="button" value="x"
-            onClick=
-            "document.getElementById('sub-task-form').style.display = 'none';
-              document.getElementById('show-sub-task-form').style.display = 'block';
-              document.getElementById('no-show-sub-task-form').style.display = 'none';"></p>
+            onClick='hideSubTask(<%= major_task.id %>)'></p>
         </div>
       </div>  
     <% end %>
@@ -113,3 +107,24 @@
   <%= link_to "ログイン", login_path%>
 <% end %>
 
+<script>
+  
+  function showSubtask(majorTaskId) {
+    let subTaskFormId = 'subTaskForm' + majorTaskId;
+    let showSubTaskForm = 'showSubTaskForm' + majorTaskId;
+    let hideSubTaskForm = 'hideSubTaskForm' + majorTaskId;
+    document.getElementById('subTaskForm' + majorTaskId).style.display = 'inline-block'; 
+    document.getElementById('showSubTaskForm' + majorTaskId).style.display = 'none';
+    document.getElementById('hideSubTaskForm' + majorTaskId).style.display = 'inline-block';
+  }
+
+  function hideSubTask(majorTaskId) {
+    let subTaskFormId =  'subTaskForm' + majorTaskId;
+    let showSubTaskForm = 'showSubTaskForm' + majorTaskId;
+    let hideSubTaskForm = 'hideSubTaskForm' + majorTaskId;
+    document.getElementById('subTaskForm' + majorTaskId).style.display = 'none';
+    document.getElementById('showSubTaskForm' + majorTaskId).style.display = 'inline-block';
+    document.getElementById('hideSubTaskForm' + majorTaskId).style.display = 'none';
+  }
+
+</script>
