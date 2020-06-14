@@ -13,4 +13,8 @@ Rails.application.routes.draw do
     resources :sub_tasks
   end
 
+  resources :sub_tasks do
+    resources :detail_tasks
+  end
+
 end

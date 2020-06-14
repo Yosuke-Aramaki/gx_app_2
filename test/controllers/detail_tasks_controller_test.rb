@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class SubTaskControllerTest < ActionDispatch::IntegrationTest
+class DetailTasksControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

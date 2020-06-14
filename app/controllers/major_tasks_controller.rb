@@ -9,11 +9,11 @@ class MajorTasksController < ApplicationController
   end
 
   def create 
-    #render plain: params[:post].inspect
+    # render plain: params.inspect
     @major_task = MajorTask.new(major_task_params)
     @major_task.user_id = current_user.id
     if @major_task.save
-      redirect_to root_path(@user)
+      redirect_to root_path
     end
   end
 

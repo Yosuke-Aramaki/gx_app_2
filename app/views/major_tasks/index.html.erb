@@ -3,11 +3,60 @@
   <h2>タスク一覧</h2>
   <%= link_to "ログアウト", logout_path, method: :delete %> 
   <% if @user.major_tasks.any? %>
-    <ul>
-      <% @user.major_tasks.each do |major_tasks| %>
-        <li>
-          <%= major_tasks.text %>
-          <%= form_for ([major_tasks, major_tasks.sub_tasks.build]) do |f| %>
+    <% @user.major_tasks.each do |major_task| %>
+      <div>
+        <div style="display: inline-block; vertical-align: top;">
+          <p><%= major_task.text %></p>
+        </div>
+        <div style="display: inline-block; vertical-align: top;">
+          <% MajorTask.find(major_task.id).sub_tasks.each do |sub_task| %>
+            <div>
+              <div style="display: inline-block; vertical-align: top;">
+                <p><%= sub_task.text %></p>
+              </div>
+              <div style="display: inline-block; vertical-align: top;">
+                <% SubTask.find(sub_task.id).detail_tasks.each do |detail_task| %>
+                  <p><%= detail_task.text %></p>
+                  <div id="detail-task-form" style="display: none;">
+                    <%= form_for :sub_task, url: sub_task_detail_tasks_path(sub_task) do |f| %>
+                      <p>
+                        <%= f.text_field :text, placeholder: '小タスク' %>
+                      </p>
+                      <p>
+                        <%= f.date_field :start_date %>
+                      </p>
+                      <p>
+                        <%= f.date_field :end_date %>
+                      </p>
+                      <p>
+                        <%= f.number_field :time_duration %>
+                      </p>
+                      <p>
+                        <%= f.submit %>
+                      </p>
+                    <% end %>
+                  </div>
+                  <p id="show-detail-task-form">
+                    <input type="button" value="+"
+                      onClick=
+                        "document.getElementById('detail-task-form').style.display = 'inline-block'; 
+                          document.getElementById('no-show-detail-task-form').style.display = 'inline-block';
+                          document.getElementById('show-detail-task-form').style.display = 'none';">
+                  </p>
+                  <p id="no-show-detail-task-form" style="display: none;">
+                    <input type="button" value="x"
+                      onClick=
+                      "document.getElementById('detail-task-form').style.display = 'none';
+                        document.getElementById('show-detail-task-form').style.display = 'inline-block';
+                        document.getElementById('no-show-detail-task-form').style.display = 'none';">
+                  </p>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div>
+          <%= form_for ([MajorTask.find(major_task.id), MajorTask.find(major_task.id).sub_tasks.build]) do |f| %>
             <p>
               <%= f.text_field :text, placeholder: '中タスク' %>
             </p>
@@ -24,9 +73,22 @@
               <%= f.submit %>
             </p>
           <% end %>
-        </li>
-      <% end %>
-    </ul>
+        </div>
+        <p id="show-sub-task-form">
+          <input type="button" value="+"
+            onClick=
+              "document.getElementById('sub-task-form').style.display = 'block'; 
+                document.getElementById('no-show-sub-task-form').style.display = 'block';
+                document.getElementById('show-sub-task-form').style.display = 'none';"></p>
+        <p id="no-show-sub-task-form" style="display: none;">
+          <input type="button" value="x"
+            onClick=
+            "document.getElementById('sub-task-form').style.display = 'none';
+              document.getElementById('show-sub-task-form').style.display = 'block';
+              document.getElementById('no-show-sub-task-form').style.display = 'none';"></p>
+        </div>
+      </div>  
+    <% end %>
   <% end %>
   <%= form_for ([@user, @user.major_tasks.build]) do |f| %>
     <p>

@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_11_011444) do
+ActiveRecord::Schema.define(version: 2020_06_12_001108) do
+
+  create_table "detail_tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "text"
+    t.date "start_date"
+    t.date "end_date"
+    t.float "time_duration"
+    t.bigint "sub_task_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sub_task_id"], name: "index_detail_tasks_on_sub_task_id"
+  end
 
   create_table "major_tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "text"
@@ -42,6 +53,7 @@ ActiveRecord::Schema.define(version: 2020_06_11_011444) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "detail_tasks", "sub_tasks"
   add_foreign_key "major_tasks", "users"
   add_foreign_key "sub_tasks", "major_tasks"
 end
