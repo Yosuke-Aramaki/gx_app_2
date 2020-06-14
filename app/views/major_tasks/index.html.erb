@@ -6,7 +6,11 @@
     <% @user.major_tasks.each do |major_task| %>
       <div>
         <div style="display: inline-block; vertical-align: top;">
-          <p><%= major_task.text %></p>
+          <%= major_task.text %>
+          <input id="showSubTaskForm<%= major_task.id%>" type="button" value="+"
+            onClick='showSubtask(<%= major_task.id %>)'>
+          <input id="hideSubTaskForm<%= major_task.id %>" style="display: none;" type="button" value="x"
+            onClick='hideSubTask(<%= major_task.id %>)'>
         </div>
         <div style="display: inline-block; vertical-align: top;">
           <% MajorTask.find(major_task.id).sub_tasks.each do |sub_task| %>
@@ -74,12 +78,6 @@
             </p>
           <% end %>
         </div>
-        <p id="showSubTaskForm<%= major_task.id%>">
-        <input type="button" value="+"
-          onClick='showSubtask(<%= major_task.id %>)'></p>
-        <p id="hideSubTaskForm<%= major_task.id %>" style="display: none;">
-          <input type="button" value="x"
-            onClick='hideSubTask(<%= major_task.id %>)'></p>
         </div>
       </div>  
     <% end %>
