@@ -13,3 +13,17 @@
  *= require_tree .
  *= require_self
  */
+
+.major-task-field {
+  width: 220px;
+  margin: 15px 0px;
+}
+
+.sub-task-field {
+  width: 220px;
+  margin: 10px 0px;
+}
+
+.detail-task-field {
+  width: 220px;
+}

@@ -5,78 +5,68 @@
   <% if @user.major_tasks.any? %>
     <% @user.major_tasks.each do |major_task| %>
       <div>
-        <div style="display: inline-block; vertical-align: top;">
+        <div class='major-task-field' style="display: inline-block; vertical-align: top;">
           <%= major_task.text %>
           <input id="showSubTaskForm<%= major_task.id%>" type="button" value="+"
-            onClick='showSubtask(<%= major_task.id %>)'>
+            onClick='showSubTaskForm(<%= major_task.id %>)'>
           <input id="hideSubTaskForm<%= major_task.id %>" style="display: none;" type="button" value="x"
             onClick='hideSubTask(<%= major_task.id %>)'>
         </div>
         <div style="display: inline-block; vertical-align: top;">
           <% MajorTask.find(major_task.id).sub_tasks.each do |sub_task| %>
             <div>
-              <div style="display: inline-block; vertical-align: top;">
-                <p><%= sub_task.text %></p>
+              <div class='sub-task-field' style="display: inline-block; vertical-align: top;">
+                <%= sub_task.text %>
+                <input id="showDetailTaskForm<%= sub_task.id %>" type="button" value="+"
+                  onClick='showDetailTaskForm(<%= sub_task.id %>)'>
+                <input id="hideDetailTaskForm<%= sub_task.id %>" style="display: none;" type="button" value="x"
+                  onClick='hideDetailTaskForm(<%= sub_task.id %>)'>
               </div>
-              <div style="display: inline-block; vertical-align: top;">
+              <div class='detail-task-field' style="display: inline-block; vertical-align: top;">
                 <% SubTask.find(sub_task.id).detail_tasks.each do |detail_task| %>
                   <p><%= detail_task.text %></p>
-                  <div id="detail-task-form" style="display: none;">
-                    <%= form_for :sub_task, url: sub_task_detail_tasks_path(sub_task) do |f| %>
-                      <p>
-                        <%= f.text_field :text, placeholder: '小タスク' %>
-                      </p>
-                      <p>
-                        <%= f.date_field :start_date %>
-                      </p>
-                      <p>
-                        <%= f.date_field :end_date %>
-                      </p>
-                      <p>
-                        <%= f.number_field :time_duration %>
-                      </p>
-                      <p>
-                        <%= f.submit %>
-                      </p>
-                    <% end %>
-                  </div>
-                  <p id="show-detail-task-form">
-                    <input type="button" value="+"
-                      onClick=
-                        "document.getElementById('detail-task-form').style.display = 'inline-block'; 
-                          document.getElementById('no-show-detail-task-form').style.display = 'inline-block';
-                          document.getElementById('show-detail-task-form').style.display = 'none';">
-                  </p>
-                  <p id="no-show-detail-task-form" style="display: none;">
-                    <input type="button" value="x"
-                      onClick=
-                      "document.getElementById('detail-task-form').style.display = 'none';
-                        document.getElementById('show-detail-task-form').style.display = 'inline-block';
-                        document.getElementById('no-show-detail-task-form').style.display = 'none';">
-                  </p>
                 <% end %>
+                <div id="detailTaskForm<%= sub_task.id %>" style="display: none;">
+                  <%= form_for :detail_task, url: sub_task_detail_tasks_path(sub_task) do |f| %>
+                    <p>
+                      <%= f.text_field :text, placeholder: '小タスク' %>
+                    </p>
+                    <p>
+                      <%= f.date_field :start_date %>
+                    </p>
+                    <p>
+                      <%= f.date_field :end_date %>
+                    </p>
+                    <p>
+                      <%= f.number_field :time_duration %>
+                    </p>
+                    <p>
+                      <%= f.submit %>
+                    </p>
+                  <% end %>
+                </div>
               </div>
             </div>
           <% end %>
-        </div>
-        <div id='subTaskForm<%= major_task.id %>' style='display: none;'>
-          <%= form_for ([MajorTask.find(major_task.id), MajorTask.find(major_task.id).sub_tasks.build]) do |f| %>
-            <p>
-              <%= f.text_field :text, placeholder: '中タスク' %>
-            </p>
-            <p>
-              <%= f.date_field :start_date %>
-            </p>
-            <p>
-              <%= f.date_field :end_date %>
-            </p>
-            <p>
-              <%= f.number_field :time_duration %>
-            </p>
-            <p>
-              <%= f.submit %>
-            </p>
-          <% end %>
+          <div id='subTaskForm<%= major_task.id %>' style='display: none;'>
+            <%= form_for ([MajorTask.find(major_task.id), MajorTask.find(major_task.id).sub_tasks.build]) do |f| %>
+              <p>
+                <%= f.text_field :text, placeholder: '中タスク' %>
+              </p>
+              <p>
+                <%= f.date_field :start_date %>
+              </p>
+              <p>
+                <%= f.date_field :end_date %>
+              </p>
+              <p>
+                <%= f.number_field :time_duration %>
+              </p>
+              <p>
+                <%= f.submit %>
+              </p>
+            <% end %>
+          </div>
         </div>
         </div>
       </div>  
@@ -107,22 +97,29 @@
 
 <script>
   
-  function showSubtask(majorTaskId) {
-    let subTaskFormId = 'subTaskForm' + majorTaskId;
-    let showSubTaskForm = 'showSubTaskForm' + majorTaskId;
-    let hideSubTaskForm = 'hideSubTaskForm' + majorTaskId;
+  function showSubTaskForm(majorTaskId) {
     document.getElementById('subTaskForm' + majorTaskId).style.display = 'inline-block'; 
     document.getElementById('showSubTaskForm' + majorTaskId).style.display = 'none';
     document.getElementById('hideSubTaskForm' + majorTaskId).style.display = 'inline-block';
   }
 
   function hideSubTask(majorTaskId) {
-    let subTaskFormId =  'subTaskForm' + majorTaskId;
-    let showSubTaskForm = 'showSubTaskForm' + majorTaskId;
-    let hideSubTaskForm = 'hideSubTaskForm' + majorTaskId;
     document.getElementById('subTaskForm' + majorTaskId).style.display = 'none';
     document.getElementById('showSubTaskForm' + majorTaskId).style.display = 'inline-block';
     document.getElementById('hideSubTaskForm' + majorTaskId).style.display = 'none';
+  }
+
+  function showDetailTaskForm(subTaskId) {
+    console.log('detailTaskForm' + subTaskId)
+    document.getElementById('detailTaskForm' + subTaskId).style.display = 'inline-block'; 
+    document.getElementById('showDetailTaskForm' + subTaskId).style.display = 'none';
+    document.getElementById('hideDetailTaskForm' + subTaskId).style.display = 'inline-block';
+  }
+
+  function hideDetailTaskForm(subTaskId) {
+    document.getElementById('detailTaskForm' + subTaskId).style.display = 'none';
+    document.getElementById('showDetailTaskForm' + subTaskId).style.display = 'inline-block';
+    document.getElementById('hideDetailTaskForm' + subTaskId).style.display = 'none';
   }
 
 </script>
