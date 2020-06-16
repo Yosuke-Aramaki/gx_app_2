@@ -100,16 +100,18 @@
   <span id="date"></span>
   <% if @major_task_list_today.any? %>
     <% @major_task_list_today.each do |major_task_day| %>
-      <p><%= major_task_day.text %></p>
-      <% MajorTask.find(major_task_day.id).sub_tasks.each do |sub_task| %>
-        <% if sub_task.start_date != nil %>
-          <% if sub_task.start_date <= Date.today && sub_task.end_date >= Date.today %>
+      <div class="major_task_box">
+        <p><%= major_task_day.text %></p>
+        <% MajorTask.find(major_task_day.id).sub_tasks.each do |sub_task| %>
+          <% if sub_task.start_date != nil %>
+            <% if sub_task.start_date <= Date.today && sub_task.end_date >= Date.today %>
+              <p><%= sub_task.text %></p>
+            <% end %>
+          <% else %>
             <p><%= sub_task.text %></p>
           <% end %>
-        <% else %>
-          <p><%= sub_task.text %></p>
         <% end %>
-      <% end %>
+      </div>
     <% end %>
   <% end %>
 </div>
@@ -117,16 +119,40 @@
   <span id="date1"></span>
   <% if @major_task_list_today.any? %>
     <% @major_task_list_today.each do |major_task_day| %>
-      <p><%= major_task_day.text %></p>
-      <% MajorTask.find(major_task_day.id).sub_tasks.each do |sub_task| %>
-        <% if sub_task.start_date != nil %>
-          <% if sub_task.start_date <= Date.today+1 && sub_task.end_date >= Date.today+1 %>
-            <p><%= sub_task.text %></p>
-          <% end %>
-        <% else %>
-          <p><%= sub_task.text %></p>
+      <div class="major_task_box">
+        <p><%= major_task_day.text %></p>
+        <% if MajorTask.find(major_task_day.id).sub_tasks.any? %>
+          <div class="sub-task-box">
+            <% MajorTask.find(major_task_day.id).sub_tasks.each do |sub_task_day| %>
+              <% if sub_task_day.start_date != nil %>
+                <% if sub_task_day.start_date <= Date.today+1 && sub_task_day.end_date >= Date.today+1 %>
+                  <p><%= sub_task_day.text %></p>
+                  <ul>
+                    <% SubTask.find(sub_task_day.id).detail_tasks.each do |detail_task_day| %>
+                      <li><%= detail_task_day.text %></li>
+                    <% end %>
+                    <input id="showDetailTaskFormDayButton<%= sub_task_day.id %>" type="button" value="やったことを追加"
+                      onClick='showDetailTaskFormDay(<%= sub_task_day.id %>)'>
+                    <div id='detailTaskFormDay<%= sub_task_day.id %>' style='display: none;'>
+                      <%= form_for ([SubTask.find(sub_task_day.id), SubTask.find(sub_task_day.id).detail_tasks.build]) do |f| %>
+                        <span>
+                          <%= f.text_field :text, placeholder: 'やったこと' %>
+                          <%= f.number_field :time_duration %>
+                        </span>
+                        <span>
+                          <%= f.submit %>
+                        </span>
+                      <% end %>
+                      <input id="hideDetailTaskFormDayButton<%= sub_task_day.id %>" type="button" value="✖️"
+                        onClick='hideDetailTaskFormDay(<%= sub_task_day.id %>)'>
+                    </div>
+                  </ul>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
         <% end %>
-      <% end %>
+      </div>
     <% end %>
   <% end %>
 </div>
@@ -171,7 +197,6 @@
   }
 
   function showDetailTaskForm(subTaskId) {
-    console.log('detailTaskForm' + subTaskId)
     document.getElementById('detailTaskForm' + subTaskId).style.display = 'inline-block'; 
     document.getElementById('showDetailTaskForm' + subTaskId).style.display = 'none';
     document.getElementById('hideDetailTaskForm' + subTaskId).style.display = 'inline-block';
@@ -181,6 +206,18 @@
     document.getElementById('detailTaskForm' + subTaskId).style.display = 'none';
     document.getElementById('showDetailTaskForm' + subTaskId).style.display = 'inline-block';
     document.getElementById('hideDetailTaskForm' + subTaskId).style.display = 'none';
+  }
+
+  function showDetailTaskFormDay(subTaskId) {
+    document.getElementById('detailTaskFormDay' + subTaskId).style.display = 'inline-block'; 
+    document.getElementById('showDetailTaskFormDayButton' + subTaskId).style.display = 'none';
+    document.getElementById('hideDetailTaskFormDayButton' + subTaskId).style.display = 'inline-block';
+  }
+
+  function hideDetailTaskFormDay(subTaskId) {
+    document.getElementById('detailTaskFormDay' + subTaskId).style.display = 'none';
+    document.getElementById('showDetailTaskFormDayButton' + subTaskId).style.display = 'inline-block';
+    document.getElementById('hideDetailTaskFormDayButton' + subTaskId).style.display = 'none';
   }
 
 </script>

@@ -29,6 +29,20 @@
 }
 
 .day-task-box {
-  width: 220px;
-  margin: 10px 0px;
+  width: 280px;
+  margin: 0px 20px;
+}
+
+.major_task_box {
+  margin: 8px 0px;
+  padding: 10px 15px;
+  background-color: #EEEEEE;
+  border-radius: 10px;
+}
+
+.sub-task-box {
+  margin: 8px 0px;
+  padding: 10px;
+  background-color: #FFFFFF;
+  border-radius: 10px;
 }
