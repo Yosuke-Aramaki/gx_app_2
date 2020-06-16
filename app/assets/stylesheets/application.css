@@ -27,3 +27,8 @@
 .detail-task-field {
   width: 220px;
 }
+
+.day-task-box {
+  width: 220px;
+  margin: 10px 0px;
+}

@@ -95,8 +95,69 @@
   <%= link_to "ログイン", login_path%>
 <% end %>
 
-<script>
-  
+<h1>振り返り</h1>
+<div class="day-task-box" style="display: inline-block; vertical-align: top;">
+  <span id="date"></span>
+  <% if @major_task_list_today.any? %>
+    <% @major_task_list_today.each do |major_task_day| %>
+      <p><%= major_task_day.text %></p>
+      <% MajorTask.find(major_task_day.id).sub_tasks.each do |sub_task| %>
+        <% if sub_task.start_date != nil %>
+          <% if sub_task.start_date <= Date.today && sub_task.end_date >= Date.today %>
+            <p><%= sub_task.text %></p>
+          <% end %>
+        <% else %>
+          <p><%= sub_task.text %></p>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+<div class="day-task-box" style="display: inline-block; vertical-align: top;">
+  <span id="date1"></span>
+  <% if @major_task_list_today.any? %>
+    <% @major_task_list_today.each do |major_task_day| %>
+      <p><%= major_task_day.text %></p>
+      <% MajorTask.find(major_task_day.id).sub_tasks.each do |sub_task| %>
+        <% if sub_task.start_date != nil %>
+          <% if sub_task.start_date <= Date.today+1 && sub_task.end_date >= Date.today+1 %>
+            <p><%= sub_task.text %></p>
+          <% end %>
+        <% else %>
+          <p><%= sub_task.text %></p>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+<div class="day-task-box" style="display: inline-block; vertical-align: top;">
+  <span id="date2"></span>
+  <% if @major_task_list_2day_later.any? %>
+    <% @major_task_list_2day_later.each do |major_task_day| %>
+      <p><%= major_task_day.text %></p>
+    <% end %>
+  <% end %>
+</div>
+
+<script> 
+  var now = new Date();
+  var year = now.getFullYear();
+  var month = now.getMonth()+1; 
+  var date = now.getDate();
+  var day = now.getDay(); 
+
+  document.getElementById("date").innerHTML = getToday() 
+  function getToday() {
+  	var day_of_the_week = new Array("日","月","火","水","木","金","土");
+    var today = month + "/" + date + "日(" + day_of_the_week[day] + ")"; 
+
+    for (let i = 1; i <= 2; i++ ) {
+      date = date + 1
+      document.getElementById("date"+i).innerHTML = month + "/" + date + "日(" + day_of_the_week[day] + ")";
+    }
+    return today;
+  }
+
   function showSubTaskForm(majorTaskId) {
     document.getElementById('subTaskForm' + majorTaskId).style.display = 'inline-block'; 
     document.getElementById('showSubTaskForm' + majorTaskId).style.display = 'none';
