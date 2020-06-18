@@ -1,14 +1,13 @@
 class MajorTasksController < ApplicationController
+
   def index
-    @major_task = MajorTask.new
-    @user = current_user
-    require 'date'
-    today = Date.today
-    @major_task_list_today = MajorTask.where("start_date <= ?", today - 2).where("end_date >= ?", today -2)
-    @major_task_list_1day_later = MajorTask.where("start_date <= ?", today - 1).where("end_date >= ?", today - 1)
-    @major_task_list_2day_later = MajorTask.where("start_date <= ?", today ).where("end_date >= ?", today )
-    @major_task_list_3day_later = MajorTask.where("start_date <= ?", today + 3).where("end_date >= ?", today + 3)
-    @major_task_list_4day_later = MajorTask.where("start_date <= ?", today + 4).where("end_date >= ?", today + 4)
+    if logged_in?
+      @major_task = MajorTask.new
+      @user = current_user
+      require 'date'
+      today = Date.today
+      @sub_task_list_today = @user.sub_tasks.where("start_date <= ?", today ).where("end_date >= ?", today)
+    end
   end
 
   def new
@@ -27,6 +26,13 @@ class MajorTasksController < ApplicationController
   private
   def major_task_params
     params.require(:major_task).permit(:text, :start_date, :end_date, :time_duration)
+  end
+
+  def user_only
+    if logged_in?
+    else
+        redirect_to root_path
+    end
   end
 
 end
