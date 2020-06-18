@@ -4,9 +4,9 @@ class MajorTasksController < ApplicationController
     @user = current_user
     require 'date'
     today = Date.today
-    @major_task_list_today = MajorTask.where("start_date <= ?", today).where("end_date >= ?", today)
-    @major_task_list_1day_later = MajorTask.where("start_date <= ?", today + 1).where("end_date >= ?", today + 1)
-    @major_task_list_2day_later = MajorTask.where("start_date <= ?", today + 2).where("end_date >= ?", today + 2)
+    @major_task_list_today = MajorTask.where("start_date <= ?", today - 2).where("end_date >= ?", today -2)
+    @major_task_list_1day_later = MajorTask.where("start_date <= ?", today - 1).where("end_date >= ?", today - 1)
+    @major_task_list_2day_later = MajorTask.where("start_date <= ?", today ).where("end_date >= ?", today )
     @major_task_list_3day_later = MajorTask.where("start_date <= ?", today + 3).where("end_date >= ?", today + 3)
     @major_task_list_4day_later = MajorTask.where("start_date <= ?", today + 4).where("end_date >= ?", today + 4)
   end

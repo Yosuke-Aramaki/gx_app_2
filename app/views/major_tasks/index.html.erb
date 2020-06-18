@@ -125,7 +125,7 @@
           <div class="sub-task-box">
             <% MajorTask.find(major_task_day.id).sub_tasks.each do |sub_task_day| %>
               <% if sub_task_day.start_date != nil %>
-                <% if sub_task_day.start_date <= Date.today+1 && sub_task_day.end_date >= Date.today+1 %>
+                <% if sub_task_day.start_date <= Date.today-2 && sub_task_day.end_date >= Date.today-2 %>
                   <p><%= sub_task_day.text %></p>
                   <ul>
                     <% SubTask.find(sub_task_day.id).detail_tasks.each do |detail_task_day| %>
