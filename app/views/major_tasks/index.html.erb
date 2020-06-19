@@ -1,3 +1,25 @@
+<div class="content">
+  <% if logged_in? %>
+    <% if @user.major_tasks.any? %>
+      <% @user.major_tasks.each do |major_task| %>
+        <div class="task-box">
+          <div class="major-task-name">
+            <%= major_task.text %>
+          </div>
+          <% MajorTask.find(major_task.id).sub_tasks.each do |sub_task| %>
+            <div class="sub-task-box">
+              <%= sub_task.text %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+
+    <% end %>
+    <div>
+    </div>
+  <% end %>
+</div>
 <h1>TODOアプリ</h1>
 <% if logged_in? %>
   <h2>タスク一覧</h2>

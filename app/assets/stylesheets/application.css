@@ -78,6 +78,19 @@ body {
   margin-right: 15px;
 }
 
+.content {
+  margin: 50px 30px;
+  display: flex;
+}
+
+.task-box {
+  width: 290px;
+  margin-right: 25px;
+  background-color: F9F7F5;
+  border-top: 10px solid #7BC86C;
+  border-radius: 8px;
+}
+
 .major-task-field {
   width: 220px;
   margin: 15px 0px;
