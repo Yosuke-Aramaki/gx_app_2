@@ -17,4 +17,9 @@ Rails.application.routes.draw do
     resources :detail_tasks
   end
 
+  resources :sessions do
+    collection do
+    end
+  end
+  
 end

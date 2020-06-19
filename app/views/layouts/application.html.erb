@@ -1,15 +1,33 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>GxApp2</title>
+    <title>Pilee</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <div class="top-header">
+      <div class="logo-header">
+        <a class="logo" href="/index">Pilee</a>
+      </div>
+      <div class="contents-header">
+        <% if logged_in? %>
+          <%= link_to "ログアウト", logout_path, method: :delete, class: 'session-button' %>
+          <%= link_to current_user.name.slice(0, 1), user_path(current_user.id), class: 'profile-button' %>
+        <% else %>
+          <div class="button-header">
+            <%= link_to "ユーザー登録", new_user_path %>
+            <%= link_to "ログイン", login_path%>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="content">
+      <%= yield %>
+    </div>
   </body>
 </html>

@@ -94,11 +94,12 @@
 
 <h1>振り返り</h1>
 <div class="day-task-box" style="display: inline-block; vertical-align: top;">
+  <span id="date1"></span>
   <% if logged_in? %>
     <% if @sub_task_list_today.any? %>
-      <% @sub_task_list_today.each do |sub_task_today| %>
-        <div class="major_task_box">
-          <p><%= MajorTask.find(sub_task_today.id).text %></p>
+      <div class="major_task_box">
+        <p><%= MajorTask.find(@sub_task_list_today.first.major_task_id).text %></p>
+        <% @sub_task_list_today.each do |sub_task_today| %>
           <div class="sub-task-box">
             <p><%= sub_task_today.text %></p>
             <ul>
@@ -122,8 +123,8 @@
               </div>
             </ul>
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     <% end %>
   <% end %>
 </div>
