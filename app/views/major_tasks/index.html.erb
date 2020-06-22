@@ -1,4 +1,4 @@
-<div class="content">
+<div class="task-list">
   <% if logged_in? %>
     <% if @user.major_tasks.any? %>
       <% @user.major_tasks.each do |major_task| %>
@@ -9,7 +9,7 @@
             </div>
             <div class="major-task-box-summary">20hr 2020/06/12 ~ 06/20</div>
           </div>
-          <% MajorTask.find(major_task.id).sub_tasks.where()each do |sub_task| %>
+          <% MajorTask.find(major_task.id).sub_tasks.where("start_date <= ?", Date.today).each do |sub_task| %>
             <div class="sub-task-box">
               <div class="sub-task-title">
                 <%= sub_task.text %>
@@ -32,17 +32,42 @@
                     </li>
                   </ul>
                 <% end %>
+                <div style="display: flex; justify-content: flex-end;">
+                  <button class="add_button" id="showDetailTaskForm<%= sub_task.id %>"
+                    onClick='showDetailTaskForm(<%= sub_task.id %>)'>+</button>
+                </div>
+                <div id="detailTaskForm<%= sub_task.id %>" style="display: none;">
+                  <%= form_for :detail_task, url: sub_task_detail_tasks_path(sub_task) do |form| %>
+                    <div>
+                      <%= form.text_area :text, placeholder: '小タスク', class: "detail-task-text-input", rows: "3" %>
+                    </div>
+                    <div class="detal-task-option-field">
+                      <div>
+                        <%= form.date_field :date, class: "detail-task-date-input" %>
+                      </div>
+                      <div>
+                        <button class="hide_button" id="hideDetailTaskForm<%= sub_task.id %>" style="display: none;" type="button"
+                          onClick='hideDetailTaskForm(<%= sub_task.id %>)'>x</button>
+                        <%= form.submit "追加", class: "add-detail-task-button" %>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
               </div>
             </div>
           <% end %>
+          <div>
+            
+          </div>
         </div>
       <% end %>
     <% else %>
 
     <% end %>
-    <div>
-    </div>
   <% end %>
+
+</div>
+<div class="day-task-box">
 
 </div>
 
