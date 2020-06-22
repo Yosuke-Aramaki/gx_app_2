@@ -3,12 +3,36 @@
     <% if @user.major_tasks.any? %>
       <% @user.major_tasks.each do |major_task| %>
         <div class="task-box">
-          <div class="major-task-name">
-            <%= major_task.text %>
+          <div class="task-box-header">
+            <div class="major-task-name">
+              <%= major_task.text %>
+            </div>
+            <div class="major-task-box-summary">20hr 2020/06/12 ~ 06/20</div>
           </div>
-          <% MajorTask.find(major_task.id).sub_tasks.each do |sub_task| %>
+          <% MajorTask.find(major_task.id).sub_tasks.where()each do |sub_task| %>
             <div class="sub-task-box">
-              <%= sub_task.text %>
+              <div class="sub-task-title">
+                <%= sub_task.text %>
+              </div>
+              <div class="sub-task-box-summary">
+                <span>20hr    2020/06/12 ~ 06/20</span>
+              </div>
+              <div class="detail-task-box">
+                <% SubTask.find(sub_task.id).detail_tasks.each do |detail_task| %>
+                  <ul>
+                    <li>
+                      <div class="detail-task-item">
+                        <div class="detail-task-name">
+                          <%= detail_task.text %>
+                        </div>
+                        <div class="detail-task-summery">
+                          <span style="vertical-align: sub;">1hr 2020/06/12<span>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                <% end %>
+              </div>
             </div>
           <% end %>
         </div>
@@ -19,7 +43,9 @@
     <div>
     </div>
   <% end %>
+
 </div>
+
 <h1>TODOアプリ</h1>
 <% if logged_in? %>
   <h2>タスク一覧</h2>
@@ -122,7 +148,7 @@
       <div class="major_task_box">
         <p><%= MajorTask.find(@sub_task_list_today.first.major_task_id).text %></p>
         <% @sub_task_list_today.each do |sub_task_today| %>
-          <div class="sub-task-box">
+          <div class="sub-task-box-day">
             <p><%= sub_task_today.text %></p>
             <ul>
               <% SubTask.find(sub_task_today.id).detail_tasks.each do |detail_task_day| %>
