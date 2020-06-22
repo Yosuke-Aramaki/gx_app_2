@@ -56,8 +56,24 @@
               </div>
             </div>
           <% end %>
+          <button class="show-sub-task-button" id="showSubTaskForm<%= major_task.id%>" type="button"
+            onClick='showSubTaskForm(<%= major_task.id %>)'>タスクを追加</button>
           <div>
-            
+            <div id='subTaskForm<%= major_task.id %>' style='display: none;'>
+              <%= form_for ([MajorTask.find(major_task.id), MajorTask.find(major_task.id).sub_tasks.build]) do |form| %>
+                <%= form.text_area :text, placeholder: '中タスク', class: "sub-task-text-input", rows: "3" %>
+                <div class="sub-task-option-field">
+                  <div><%= form.date_field :start_date, class: "sub-task-date-input" %></div>
+                  <div>~</div>
+                  <div><%= form.date_field :end_date, class: "sub-task-date-input" %></div>
+                </div>
+                <div class="sub-task-button-field">
+                  <button class="hide_button" id="hideSubTaskForm<%= major_task.id %>" style="display: none;" type="button"
+                    onClick='hideSubTask(<%= major_task.id %>)'>✖️</button>
+                  <%= form.submit "追加", class: "add-task-button" %>
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
       <% end %>
@@ -68,7 +84,7 @@
 
 </div>
 <div class="day-task-box">
-
+  
 </div>
 
 <h1>TODOアプリ</h1>
