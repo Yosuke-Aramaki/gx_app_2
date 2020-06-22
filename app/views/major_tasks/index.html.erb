@@ -92,9 +92,9 @@
           <div class="sub-task-button-field">
             <%= form.submit "追加", class: "add-task-button" %>
           </div>
+        <% end %>
             <button class="hide_button" id="hideMajorTaskForm" style="display: none;" type="button"
               onClick='hideMajorTaskForm()'>✖️</button>
-        <% end %>
       </div>
     </div>
   <% end %>
@@ -268,11 +268,8 @@
 
   function hideMajorTaskForm() {
     document.getElementById('majorTaskForm').style.display = 'none';
-    console.log("1")
     document.getElementById('showMajorTaskForm').style.display = 'inline-block';
-    console.log("2")
     document.getElementById('hideMajorTaskForm').style.display = 'none';
-    console.log("3")
   }
 
   function showSubTaskForm(majorTaskId) {
