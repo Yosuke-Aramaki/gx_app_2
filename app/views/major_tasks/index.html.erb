@@ -79,12 +79,23 @@
       <% end %>
     <% end %>
     <div class="add-major-task-field">
-      <%= form_for :major_task, url: user_major_tasks_path(@user) do |form| %>
-        <%= form.text_field :text, placeholder: '大タスク' %>
-        <%= form.date_field :start_date %>
-        <%= form.date_field :end_date %>
-        <%= form.submit %>
-      <% end %>
+      <button class="show-sub-task-button" id="showMajorTaskForm" type="button" style="margin-top: 8px;"
+        onClick='showMajorTaskForm()'>タスクを追加</button>
+      <div class="" id="majorTaskForm" style='display: none;'>
+        <%= form_for :major_task, url: user_major_tasks_path(@user) do |form| %>
+          <%= form.text_area :text, placeholder: '大タスク', class: "sub-task-text-input", rows: "3" %>
+          <div class="sub-task-option-field">
+            <div><%= form.date_field :start_date, class: "sub-task-date-input" %></div>
+            <div>~</div>
+            <div><%= form.date_field :end_date, class: "sub-task-date-input" %></div>
+          </div>
+          <div class="sub-task-button-field">
+            <%= form.submit "追加", class: "add-task-button" %>
+          </div>
+            <button class="hide_button" id="hideMajorTaskForm" style="display: none;" type="button"
+              onClick='hideMajorTaskForm()'>✖️</button>
+        <% end %>
+      </div>
     </div>
   <% end %>
 </div>
@@ -96,6 +107,7 @@
     <% end %>
   <% end %>
 </div>
+<br/>
 <h1>TODOアプリ</h1>
 <% if logged_in? %>
 
@@ -246,6 +258,21 @@
       document.getElementById("date"+i).innerHTML = month + "/" + date + "日(" + day_of_the_week[day] + ")";
     }
     return today;
+  }
+  
+  function showMajorTaskForm() {
+    document.getElementById('majorTaskForm').style.display = 'inline-block'; 
+    document.getElementById('showMajorTaskForm').style.display = 'none';
+    document.getElementById('hideMajorTaskForm').style.display = 'inline-block';
+  }
+
+  function hideMajorTaskForm() {
+    document.getElementById('majorTaskForm').style.display = 'none';
+    console.log("1")
+    document.getElementById('showMajorTaskForm').style.display = 'inline-block';
+    console.log("2")
+    document.getElementById('hideMajorTaskForm').style.display = 'none';
+    console.log("3")
   }
 
   function showSubTaskForm(majorTaskId) {
