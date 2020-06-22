@@ -18,8 +18,8 @@
                 <span>20hr    2020/06/12 ~ 06/20</span>
               </div>
               <div class="detail-task-box">
-                <% SubTask.find(sub_task.id).detail_tasks.each do |detail_task| %>
-                  <ul>
+                <ul>
+                  <% SubTask.find(sub_task.id).detail_tasks.each do |detail_task| %>
                     <li>
                       <div class="detail-task-item">
                         <div class="detail-task-name">
@@ -30,8 +30,8 @@
                         </div>
                       </div>
                     </li>
-                  </ul>
-                <% end %>
+                  <% end %>
+                </ul>
                 <div style="display: flex; justify-content: flex-end;">
                   <button class="add_button" id="showDetailTaskForm<%= sub_task.id %>"
                     onClick='showDetailTaskForm(<%= sub_task.id %>)'>+</button>
@@ -77,18 +77,28 @@
           </div>
         </div>
       <% end %>
-    <% else %>
+    <% end %>
+    <div class="add-major-task-field">
+      <%= form_for :major_task, url: user_major_tasks_path(@user) do |form| %>
+        <%= form.text_field :text, placeholder: '大タスク' %>
+        <%= form.date_field :start_date %>
+        <%= form.date_field :end_date %>
+        <%= form.submit %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
 
+<div class="day-task-box">
+  <span id="date1"></span>
+  <% if logged_in? %>
+    <% if @sub_task_list_today.any? %>
     <% end %>
   <% end %>
-
 </div>
-<div class="day-task-box">
-  
-</div>
-
 <h1>TODOアプリ</h1>
 <% if logged_in? %>
+
   <h2>タスク一覧</h2>
   <%= link_to "ログアウト", logout_path, method: :delete %> 
   <% if @user.major_tasks.any? %>
@@ -180,7 +190,6 @@
   <%= link_to "Sign up", new_user_path %>
   <%= link_to "ログイン", login_path%>
 <% end %>
-
 <h1>振り返り</h1>
 <div class="day-task-box" style="display: inline-block; vertical-align: top;">
   <span id="date1"></span>
@@ -217,6 +226,7 @@
     <% end %>
   <% end %>
 </div>
+  
 
 
 <script> 
