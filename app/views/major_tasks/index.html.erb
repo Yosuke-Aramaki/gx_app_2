@@ -104,6 +104,11 @@
   <span id="date1"></span>
   <% if logged_in? %>
     <% if @sub_task_list_today.any? %>
+      <% @sub_task_list_today.each_with_index do |sub_task_today, i| %>
+        <% if i == 0 || @sub_task_list_today[i-1].major_task_id == @sub_task_list_today[i].major_task_id %>
+          <p><%= MajorTask.find(@sub_task_list_today[i].major_task_id).text %></p>
+        <% end %>
+      <% end %>
     <% end %>
   <% end %>
 </div>
@@ -208,8 +213,15 @@
   <% if logged_in? %>
     <% if @sub_task_list_today.any? %>
       <div class="major_task_box">
-        <p><%= MajorTask.find(@sub_task_list_today.first.major_task_id).text %></p>
-        <% @sub_task_list_today.each do |sub_task_today| %>
+        <span><%= @sub_task_list_today[0].major_task_id %></span>
+        <% @sub_task_list_today.each_with_index do |sub_task_today, i| %>
+          <% if i == 0 || @sub_task_list_today[i-1].major_task_id == @sub_task_list_today[i].major_task_id %>
+            <% if @sub_task_list_today[i-1].major_task_id == @sub_task_list_today[i].major_task_id %>
+              <p><%= MajorTask.find(@sub_task_list_today[i].major_task_id).text %></p>
+            <% end %>
+          <% else %>
+            <p><%= MajorTask.find(@sub_task_list_today[i].major_task_id).text %></p>
+          <% end %>
           <div class="sub-task-box-day">
             <p><%= sub_task_today.text %></p>
             <ul>
