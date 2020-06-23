@@ -7,7 +7,12 @@
             <div class="major-task-name">
               <%= major_task.text %>
             </div>
-            <div class="major-task-box-summary">20hr 2020/06/12 ~ 06/20</div>
+            <div class="major-task-box-summary">
+              <% if !major_task.time_duration.nil? && !major_task.start_date.nil? %>
+                <%= major_task.time_duration %>
+                <%= major_task.start_date %> ~ <%= major_task.end_date %>
+              <% end %>
+            </div>
           </div>
           <% MajorTask.find(major_task.id).sub_tasks.where("start_date <= ?", Date.today).each do |sub_task| %>
             <div class="sub-task-box">
@@ -15,7 +20,9 @@
                 <%= sub_task.text %>
               </div>
               <div class="sub-task-box-summary">
-                <span>20hr    2020/06/12 ~ 06/20</span>
+                <% if !sub_task.time_duration.nil? && !sub_task.start_date.nil? %>
+                  <%= sub_task.time_duration %>hr <%= sub_task.start_date %> ~ <%= sub_task.end_date %>
+                <% end %>
               </div>
               <div class="detail-task-box">
                 <ul>
@@ -26,7 +33,11 @@
                           <%= detail_task.text %>
                         </div>
                         <div class="detail-task-summery">
-                          <span style="vertical-align: sub;">1hr 2020/06/12<span>
+                          <% if !detail_task.time_duration.nil? && !detail_task.date.nil? %>
+                            <span style="vertical-align: sub;">
+                              <%= detail_task.time_duration %>hr <%= detail_task.date %> 
+                            <span>
+                          <% end %>
                         </div>
                       </div>
                     </li>
