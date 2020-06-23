@@ -9,19 +9,21 @@ class DetailTasksController < ApplicationController
     @detail_task.sub_task_id = params[:sub_task_id]
     @detail_task.date = Date.today
     @sub_task = SubTask.find(params[:sub_task_id])
+    @major_task = MajorTask.find(@sub_task.major_task_id)
     if @sub_task.time_duration.nil? 
       @sub_task.update(time_duration: params[:detail_task][:time_duration])
+      if @major_task.time_duration.nil?
+        @major_task.update(time_duration: params[:detail_task][:time_duration])
+      end
     else
-      sum = @sub_task.time_duration + params[:detail_task][:time_duration].to_f
-      @sub_task.update(time_duration: sum)
+      sumofSubTask = @sub_task.time_duration + params[:detail_task][:time_duration].to_f
+      @sub_task.update(time_duration: sumofSubTask)
+      sumofMajorTask = @major_task.time_duration + params[:detail_task][:time_duration].to_f
+      @sub_task.update(time_duration: sumofMajorTask)
     end
     if @detail_task.save
       redirect_to root_path()
     end
-  end
-
-  def show
-    @detail_task = DetailTask.find(params[:id])
   end
 
   def update
@@ -29,11 +31,17 @@ class DetailTasksController < ApplicationController
     @sub_task = SubTask.find(params[:sub_task_id])
     @detail_task = DetailTask.find(params[:id])
     @detail_task.time_duration = params[:detail_task][:time_duration]
+    @major_task = MajorTask.find(@sub_task.major_task_id)
     if @sub_task.time_duration.nil? 
       @sub_task.update(time_duration: params[:detail_task][:time_duration])
+      if @major_task.time_duration.nil?
+        @major_task.update(time_duration: params[:detail_task][:time_duration])
+      end
     else
-      sum = @sub_task.time_duration + params[:detail_task][:time_duration].to_f
-      @sub_task.update(time_duration: sum)
+      sumofSubTask = @sub_task.time_duration + params[:detail_task][:time_duration].to_f
+      @sub_task.update(time_duration: sumofSubTask)
+      sumofMajorTask = @major_task.time_duration + params[:detail_task][:time_duration].to_f
+      @sub_task.update(time_duration: sumofMajorTask)
     end
     if @detail_task.update(time_duration: params[:detail_task][:time_duration])
       redirect_to root_path()
