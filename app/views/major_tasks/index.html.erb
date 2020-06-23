@@ -100,24 +100,57 @@
   <% end %>
 </div>
 
-<div class="day-task-box">
-  <span id="date1"></span>
-  <% if logged_in? %>
-    <% if @sub_task_list_today.any? %>
-      <% @sub_task_list_today.each_with_index do |sub_task_today, i| %>
-        <% if i > 0 && @sub_task_list_today[i-1].major_task_id != @sub_task_list_today[i].major_task_id %>
-          <p><%= MajorTask.find(@sub_task_list_today[i].major_task_id).text %></p>
-        <% else %>
-          <% if i == 0 %>
-            <p><%= MajorTask.find(@sub_task_list_today[i].major_task_id).text %></p>
+<% if logged_in? %>
+  <div style="margin: 50px 30px;">
+    <div class="day-task-box">
+      <p class="date-field" id="date1"></span>
+      <% if @sub_task_list_today.any? %>
+        <% @sub_task_list_today.each_with_index do |sub_task_today, i| %>
+          <% if i > 0 && @sub_task_list_today[i-1].major_task_id != @sub_task_list_today[i].major_task_id %>
+            <p class="major-task-name-day"><%= MajorTask.find(@sub_task_list_today[i].major_task_id).text %></p>
+          <% else %>
+            <% if i == 0 %>
+              <p class="major-task-name-day"><%= MajorTask.find(@sub_task_list_today[i].major_task_id).text %></p>
+            <% end %>
           <% end %>
+            <div class="sub-task-box-day">
+              <div class="sub-task-title">
+                <%= sub_task_today.text %>
+              </div>
+              <ul>
+                <% SubTask.find(sub_task_today.id).detail_tasks.each do |detail_task_day| %>
+                  <li><%= detail_task_day.text %></li>
+                <% end %>
+              </ul>
+              <input class="add-done-task-button" id="showDetailTaskFormDayButton<%= sub_task_today.id %>" type="button" value="+ 今日やったこと"
+                onClick='showDetailTaskFormDay(<%= sub_task_today.id %>)'>
+              <div id='detailTaskFormDay<%= sub_task_today.id %>' style='display: none;'>
+                <%= form_for ([SubTask.find(sub_task_today.id), SubTask.find(sub_task_today.id).detail_tasks.build]) do |form| %>
+                  <span>
+                    <%= form.text_area :text, placeholder: 'やったこと', class: "done-task-text-input" %>
+                    <%= form.number_field :time_duration, class: "done-task-number-input" %>
+                  </span>
+                  <span>
+                    <%= form.submit %>
+                  </span>
+                <% end %>
+                <input id="hideDetailTaskFormDayButton<%= sub_task_today.id %>" type="button" value="✖️"
+                  onClick='hideDetailTaskFormDay(<%= sub_task_today.id %>)'>
+              </div>
+            </div>
         <% end %>
-        
       <% end %>
-    <% end %>
-  <% end %>
-</div>
+    </div>
+  </div>
+<% end %>
 <br/>
+
+
+
+
+
+
+
 <h1>TODOアプリ</h1>
 <% if logged_in? %>
 
@@ -233,22 +266,8 @@
               <% SubTask.find(sub_task_today.id).detail_tasks.each do |detail_task_day| %>
                 <li><%= detail_task_day.text %></li>
               <% end %>
-              <input id="showDetailTaskFormDayButton<%= sub_task_today.id %>" type="button" value="やったことを追加"
-                onClick='showDetailTaskFormDay(<%= sub_task_today.id %>)'>
-              <div id='detailTaskFormDay<%= sub_task_today.id %>' style='display: none;'>
-                <%= form_for ([SubTask.find(sub_task_today.id), SubTask.find(sub_task_today.id).detail_tasks.build]) do |f| %>
-                  <span>
-                    <%= f.text_field :text, placeholder: 'やったこと' %>
-                    <%= f.number_field :time_duration %>
-                  </span>
-                  <span>
-                    <%= f.submit %>
-                  </span>
-                <% end %>
-                <input id="hideDetailTaskFormDayButton<%= sub_task_today.id %>" type="button" value="✖️"
-                  onClick='hideDetailTaskFormDay(<%= sub_task_today.id %>)'>
-              </div>
             </ul>
+
           </div>
         <% end %>
       </div>
