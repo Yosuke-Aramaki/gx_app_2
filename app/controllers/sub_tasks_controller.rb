@@ -9,6 +9,19 @@ class SubTasksController < ApplicationController
     @sub_task = SubTask.new(sub_task_params)
     @sub_task.major_task_id = params[:major_task_id]
     @sub_task.user_id = current_user.id
+    @major_task = MajorTask.find(params[:major_task_id])
+    if @major_task.start_date.nil? || @major_task.end_date.nil? || (@major_task.start_date > @sub_task.start_date && @major_task.end_date < @sub_task.end_date)
+      @major_task.start_date = @sub_task.start_date
+      @major_task.end_date = @sub_task.end_date
+      @major_task.save    
+    elsif @major_task.start_date > @sub_task.start_date
+      @major_task.start_date = @sub_task.start_date
+      @major_task.save
+    elsif @major_task.end_date < @sub_task.end_date
+      @major_task.end_date = @sub_task.end_date
+      @major_task.save
+    else
+    end
     if @sub_task.save
       redirect_to root_path()
     end
