@@ -80,7 +80,7 @@
       <button class="show-sub-task-button" id="showMajorTaskForm" type="button" style="margin-top: 8px;"
         onClick='showMajorTaskForm()'>タスクを追加</button>
       <div class="" id="majorTaskForm" style='display: none;'>
-        <%= form_for :major_task, url: user_major_tasks_path(@user) do |form| %>
+        <%= form_for @major_task, url: user_major_tasks_path(@user) do |form| %>
           <%= form.text_area :text, placeholder: '大タスク', class: "sub-task-text-input", rows: "3" %>
           <div class="sub-task-option-field">
             <div><%= form.date_field :start_date, class: "sub-task-date-input" %></div>
@@ -117,7 +117,14 @@
               </div>
               <ul>
                 <% SubTask.find(sub_task_today.id).detail_tasks.each do |detail_task_day| %>
-                  <li><%= detail_task_day.text %></li>
+                  <li>
+                    <div style="display: flex; justify-content: space-between;">
+                      <%= detail_task_day.text %>
+                      <%= form_for :detail_task, url: sub_task_detail_task_path(sub_task_today.id, id: detail_task_day.id), method: "PUT" do |form| %>
+                        <%= form.number_field :time_duration, placeholder: 'かかった時間', class: "done-task-number-input" %>
+                      <% end %>
+                    </div>
+                  </li>
                 <% end %>
               </ul>
               <input class="add-done-task-button" id="showDetailTaskFormDayButton<%= sub_task_today.id %>" type="button" value="+ 今日やったこと"
