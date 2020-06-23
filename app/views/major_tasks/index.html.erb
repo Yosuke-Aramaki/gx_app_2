@@ -58,22 +58,20 @@
           <% end %>
           <button class="show-sub-task-button" id="showSubTaskForm<%= major_task.id%>" type="button"
             onClick='showSubTaskForm(<%= major_task.id %>)'>タスクを追加</button>
-          <div>
-            <div id='subTaskForm<%= major_task.id %>' style='display: none;'>
-              <%= form_for ([MajorTask.find(major_task.id), MajorTask.find(major_task.id).sub_tasks.build]) do |form| %>
-                <%= form.text_area :text, placeholder: '中タスク', class: "sub-task-text-input", rows: "3" %>
-                <div class="sub-task-option-field">
-                  <div><%= form.date_field :start_date, class: "sub-task-date-input" %></div>
-                  <div>~</div>
-                  <div><%= form.date_field :end_date, class: "sub-task-date-input" %></div>
-                </div>
-                <div class="sub-task-button-field">
-                  <button class="hide_button" id="hideSubTaskForm<%= major_task.id %>" style="display: none;" type="button"
-                    onClick='hideSubTask(<%= major_task.id %>)'>✖️</button>
-                  <%= form.submit "追加", class: "add-task-button" %>
-                </div>
-              <% end %>
-            </div>
+          <div id='subTaskForm<%= major_task.id %>' style='display: none;'>
+            <%= form_for ([MajorTask.find(major_task.id), MajorTask.find(major_task.id).sub_tasks.build]) do |form| %>
+              <%= form.text_area :text, placeholder: '中タスク', class: "sub-task-text-input", rows: "3" %>
+              <div class="sub-task-option-field">
+                <div><%= form.date_field :start_date, class: "sub-task-date-input" %></div>
+                <div>~</div>
+                <div><%= form.date_field :end_date, class: "sub-task-date-input" %></div>
+              </div>
+              <div class="sub-task-button-field">
+                <button class="hide_button" id="hideSubTaskForm<%= major_task.id %>" style="display: none;" type="button"
+                  onClick='hideSubTask(<%= major_task.id %>)'>✖️</button>
+                <%= form.submit "追加", class: "add-task-button" %>
+              </div>
+            <% end %>
           </div>
         </div>
       <% end %>
@@ -126,16 +124,18 @@
                 onClick='showDetailTaskFormDay(<%= sub_task_today.id %>)'>
               <div id='detailTaskFormDay<%= sub_task_today.id %>' style='display: none;'>
                 <%= form_for ([SubTask.find(sub_task_today.id), SubTask.find(sub_task_today.id).detail_tasks.build]) do |form| %>
-                  <span>
-                    <%= form.text_area :text, placeholder: 'やったこと', class: "done-task-text-input" %>
-                    <%= form.number_field :time_duration, class: "done-task-number-input" %>
-                  </span>
-                  <span>
-                    <%= form.submit %>
-                  </span>
+                  <div>
+                    <div style="vertical-align : top;">
+                      <%= form.text_area :text, placeholder: 'やったこと', class: "done-task-text-input", rows: "2" %>
+                      <%= form.number_field :time_duration, placeholder: 'かかった時間', class: "done-task-number-input" %>
+                    </div>
+                    <div class="sub-task-button-field">
+                      <input class="hide_button" id="hideDetailTaskFormDayButton<%= sub_task_today.id %>" type="button" value="✖️"
+                        onClick='hideDetailTaskFormDay(<%= sub_task_today.id %>)'>
+                      <%= form.submit "追加", class: "add-task-button" %>
+                    </div>
+                  </div>
                 <% end %>
-                <input id="hideDetailTaskFormDayButton<%= sub_task_today.id %>" type="button" value="✖️"
-                  onClick='hideDetailTaskFormDay(<%= sub_task_today.id %>)'>
               </div>
             </div>
         <% end %>
