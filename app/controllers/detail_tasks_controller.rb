@@ -19,7 +19,7 @@ class DetailTasksController < ApplicationController
       sumofSubTask = @sub_task.time_duration + params[:detail_task][:time_duration].to_f
       @sub_task.update(time_duration: sumofSubTask)
       sumofMajorTask = @major_task.time_duration + params[:detail_task][:time_duration].to_f
-      @sub_task.update(time_duration: sumofMajorTask)
+      @major_task.update(time_duration: sumofMajorTask)
     end
     if @detail_task.save
       redirect_to root_path()
