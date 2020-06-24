@@ -4,17 +4,29 @@
       <h2>アカウントを作成</h2>
     </div>
     <%= form_with(model: @user, local: true) do |f| %>
-      <div>
+      <div class="form-field">
         <%= f.text_field :name, placeholder: 'ユーザー名', class: "form-section" %>
+        <% if @user.errors.messages[:name].any? %>
+          <span class="error"><%= @user.errors.messages[:name][0] %></span>
+        <% end %>
       </div>
-      <div>
+      <div class="form-field">
         <%= f.email_field :email, placeholder: 'メールアドレス', class: "form-section" %>
+        <% if @user.errors.messages[:email].any? %>
+          <span class="error"><%= @user.errors.messages[:email][0] %></span>
+        <% end %>
       </div>
-      <div>
+      <div class="form-field">
         <%= f.password_field :password, placeholder: 'パスワード', class: "form-section" %>
+        <% if @user.errors.messages[:password].any? %>
+          <span class="error"><%= @user.errors.messages[:password][0] %></span>
+        <% end %>
       </div>
-      <div>
+      <div class="form-field">
         <%= f.password_field :password_confirmation, placeholder: 'パスワード確認', class: "form-section" %>
+        <% if @user.errors.messages[:name].any? %>
+          <span class="error"><%= @user.errors.messages[:password_confirmation][0] %></span>
+        <% end %>
       </div>
       <%= f.submit "アカウントを作成", class: "form-button" %>
     <% end %>

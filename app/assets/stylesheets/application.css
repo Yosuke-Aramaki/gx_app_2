@@ -102,12 +102,15 @@ body {
   margin-bottom: 35px;
 }
 
+.form-field {
+  margin-bottom: 20px;
+}
+
 .form-section {
   width: 100%;
   font-size: 13px;
   height: 40px;
   padding-left: 8px;
-  margin-bottom: 20px;
   background-color: #FAFBFC;
   border: 2px solid #DFE1E6;
   box-sizing: border-box;
@@ -134,6 +137,11 @@ body {
 
 .form-button:hover {
   background: #359DFA;
+}
+
+.error {
+  font-size: 12px;
+  color: #FF954A;
 }
 
 /* ============== task list ================= */
