@@ -27,7 +27,7 @@ body {
   height: 50px;
   /* margin: -200% -200% 0 -200%;
   padding: 200% 200% 0 200%; */
-  background-color: #000000;
+  background-color: rgba(45,45,45, 0.32);
   opacity: 0.32;
   display: flex;
   justify-content: space-between
@@ -39,7 +39,8 @@ body {
 
 .logo {
   margin-left: 15px;
-  color: #ffffff;
+  height: 30px;
+  opacity: 1.0;
 }
 
 .contents-header {
