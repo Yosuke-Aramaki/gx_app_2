@@ -17,6 +17,7 @@
 body { 
   margin: 0px;
   -webkit-text-size-adjust: 100%;
+  background-color: #f9fafc;
 }
 
 /* ==============  header ================= */
@@ -78,6 +79,61 @@ body {
   /* box-shadow: 6px 6px 3px #666666;   */
   border: 2px solid #ffffff; 
   margin-right: 15px;
+}
+
+/* ==============  create account ================= */
+
+.section-field {
+  width: 100%;
+}
+
+.box-frame {
+  width: 320px;
+  margin: 0 auto;
+  padding: 25px 40px;
+  text-align: center;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px 0px;
+}
+
+.box-frame-title h2 {
+  margin-top: 4px;
+  margin-bottom: 35px;
+}
+
+.form-section {
+  width: 100%;
+  font-size: 13px;
+  height: 40px;
+  padding-left: 8px;
+  margin-bottom: 20px;
+  background-color: #FAFBFC;
+  border: 2px solid #DFE1E6;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+.form-button {
+  width: 100%;
+  height: 40px;
+  font-size: 14px;
+  font-weight: 600;
+  box-sizing: border-box;
+  display: inline-block;
+  border-radius: 8px;
+  border: 0;      
+  cursor: pointer;
+  padding: auto 18px;
+  background: #178BF3;
+  color: #ffffff;
+  transition: .2s;
+  /* box-shadow: 6px 6px 3px #666666;   */
+  /* border: 2px solid #ffffff;  */
+}
+
+.form-button:hover {
+  background: #359DFA;
 }
 
 /* ============== task list ================= */

@@ -17,8 +17,8 @@
           <%= link_to current_user.name.slice(0, 1), user_path(current_user.id), class: 'profile-button' %>
         <% else %>
           <div class="button-header">
-            <%= link_to "ユーザー登録", new_user_path %>
-            <%= link_to "ログイン", login_path%>
+            <%= link_to "ユーザー登録", new_user_path, class: 'session-button' %>
+            <%= link_to "ログイン", login_path, class: 'session-button' %>
           </div>
         <% end %>
       </div>

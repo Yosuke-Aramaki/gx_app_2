@@ -1,20 +1,22 @@
-<h2>Sign up</h2>
-<%= form_with(model: @user, local: true) do |f| %>
-  <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :email %><br>
-    <%= f.email_field :email %>
-  </p>
-  <p>
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
-  </p>
-  <p>
-    <%= f.label :password_confirmation %><br>
-    <%= f.password_field :password_confirmation %>
-  </p>
-  <%= f.submit "Create my account" %>
-<% end %>
+<section class="section-field">
+  <div class="box-frame">
+    <div class="box-frame-title">
+      <h2>アカウントを作成</h2>
+    </div>
+    <%= form_with(model: @user, local: true) do |f| %>
+      <div>
+        <%= f.text_field :name, placeholder: 'ユーザー名', class: "form-section" %>
+      </div>
+      <div>
+        <%= f.email_field :email, placeholder: 'メールアドレス', class: "form-section" %>
+      </div>
+      <div>
+        <%= f.password_field :password, placeholder: 'パスワード', class: "form-section" %>
+      </div>
+      <div>
+        <%= f.password_field :password_confirmation, placeholder: 'パスワード確認', class: "form-section" %>
+      </div>
+      <%= f.submit "アカウントを作成", class: "form-button" %>
+    <% end %>
+  </div>
+</section>
