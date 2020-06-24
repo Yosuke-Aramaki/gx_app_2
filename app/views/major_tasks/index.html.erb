@@ -1,3 +1,4 @@
+<h1 style="margin-left: 25px;">タスク一覧</h1>
 <div class="task-list">
   <% if logged_in? %>
     <% if @user.major_tasks.any? %>
@@ -94,7 +95,7 @@
     <% end %>
     <div class="add-major-task-field">
       <button class="show-sub-task-button" id="showMajorTaskForm" type="button" style="margin-top: 8px;"
-        onClick='showMajorTaskForm()'>タスクを追加</button>
+        onClick='showMajorTaskForm()'>リストを追加</button>
       <div class="" id="majorTaskForm" style='display: none;'>
         <%= form_for @major_task, url: user_major_tasks_path(@user) do |form| %>
           <%= form.text_area :text, placeholder: '大タスク', class: "sub-task-text-input", rows: "3" %>
@@ -116,8 +117,9 @@
 
 <% if logged_in? %>
   <div style="margin: 50px 30px;">
+    <h1>ふりかえり</h1>
     <div class="day-task-box">
-      <p class="date-field" id="date1"></span>
+      <p class="date-field" id="date"></span>
       <% if @sub_task_list_today.any? %>
         <% @sub_task_list_today.each_with_index do |sub_task_today, i| %>
           <% if i > 0 && @sub_task_list_today[i-1].major_task_id != @sub_task_list_today[i].major_task_id %>
@@ -184,11 +186,10 @@
   function getToday() {
   	var day_of_the_week = new Array("日","月","火","水","木","金","土");
     var today = month + "/" + date + "日(" + day_of_the_week[day] + ")"; 
-
-    for (let i = 1; i <= 2; i++ ) {
-      date = date + 1
-      document.getElementById("date"+i).innerHTML = month + "/" + date + "日(" + day_of_the_week[day] + ")";
-    }
+    // for (let i = 1; i <= 2; i++ ) {
+    //   date = date + 1
+    //   document.getElementById("date"+i).innerHTML = month + "/" + date + "日(" + day_of_the_week[day] + ")";
+    // }
     return today;
   }
   

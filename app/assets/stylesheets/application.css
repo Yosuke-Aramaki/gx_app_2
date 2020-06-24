@@ -153,13 +153,17 @@ body {
 /* ============== task list ================= */
 
 .task-list {
-  margin: 50px 30px;
+  margin: 50px 0px;
+  scroll-padding-right: 25px;
   display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
 }
 
 .task-box {
   width: 290px;
-  margin-right: 25px;
+  margin-left: 25px;
   padding-bottom: 8px;
   background-color: #F9F7F5;
   border-top: 10px solid #7BC86C;

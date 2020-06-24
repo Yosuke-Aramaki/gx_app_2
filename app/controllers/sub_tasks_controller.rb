@@ -10,7 +10,13 @@ class SubTasksController < ApplicationController
     @sub_task.major_task_id = params[:major_task_id]
     @sub_task.user_id = current_user.id
     @major_task = MajorTask.find(params[:major_task_id])
-    if @major_task.start_date.nil? || @major_task.end_date.nil? || (@major_task.start_date > @sub_task.start_date && @major_task.end_date < @sub_task.end_date)
+    if @sub_task.start_date.nil?
+      @sub_task.start_date = Date.today
+      if @major_task.start_date.nil?
+        @major_task.start_date = @sub_task.start_date
+        @major_task.save      
+      end
+    elsif @major_task.start_date.nil? || @major_task.end_date.nil? || (@major_task.start_date > @sub_task.start_date && @major_task.end_date < @sub_task.end_date)
       @major_task.start_date = @sub_task.start_date
       @major_task.end_date = @sub_task.end_date
       @major_task.save    
