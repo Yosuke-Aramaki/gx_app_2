@@ -31,7 +31,7 @@
                 <% end %>
               </div>
               <div class="detail-task-box">
-                <ul>
+                <ul id="detail-task-list">
                   <% SubTask.find(sub_task.id).detail_tasks.each do |detail_task| %>
                     <li>
                       <div class="detail-task-item">
