@@ -152,13 +152,17 @@ body {
 
 /* ============== task list ================= */
 
-.task-list {
+.task-list-layout {
   margin: 50px 0px;
   scroll-padding-right: 25px;
   display: flex;
   overflow-x: auto;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
+}
+
+.task-list {
+  display: flex;
 }
 
 .task-box {

@@ -1,101 +1,103 @@
 <h1 style="margin-left: 25px;">タスク一覧</h1>
-<div class="task-list">
+<div class="task-list-layout">
   <% if logged_in? %>
-    <% if @user.major_tasks.any? %>
-      <% @user.major_tasks.each do |major_task| %>
-        <div class="task-box">
-          <div class="task-box-header">
-            <div class="major-task-name">
-              <%= major_task.text %>
-            </div>
-            <div class="major-task-box-summary">
-              <% if !major_task.time_duration.nil? %>
-                <%= major_task.time_duration %>hr
-              <% end %>
-              <% if !major_task.start_date.nil? %>
-                <%= major_task.start_date %> ~ <%= major_task.end_date %>
-              <% end %>
-            </div>
-          </div>
-          <% MajorTask.find(major_task.id).sub_tasks.where("start_date <= ?", Date.today).each do |sub_task| %>
-            <div class="sub-task-box">
-              <div class="sub-task-title">
-                <%= sub_task.text %>
+    <div id="task-list" class="task-list">
+      <% if @user.major_tasks.any? %>
+        <% @user.major_tasks.each do |major_task| %>
+          <div class="task-box">
+            <div class="task-box-header">
+              <div class="major-task-name">
+                <%= major_task.text %>
               </div>
-              <div class="sub-task-box-summary">
-                <% if !sub_task.time_duration.nil? %>
-                  <%= sub_task.time_duration %>hr
+              <div class="major-task-box-summary">
+                <% if !major_task.time_duration.nil? %>
+                  <%= major_task.time_duration %>hr
                 <% end %>
-                <% if !sub_task.start_date.nil? %>
-                  <%= sub_task.start_date %> ~ <%= sub_task.end_date %>
+                <% if !major_task.start_date.nil? %>
+                  <%= major_task.start_date %> ~ <%= major_task.end_date %>
                 <% end %>
               </div>
-              <div class="detail-task-box">
-                <ul id=detail-task-list-<%= sub_task.id %>>
-                  <% SubTask.find(sub_task.id).detail_tasks.each do |detail_task| %>
-                    <li>
-                      <div class="detail-task-item">
-                        <div class="detail-task-name">
-                          <%= detail_task.text %>
-                        </div>
-                        <div class="detail-task-summery">
-                          <span class="detail-task-summery-item">
-                            <% if !detail_task.time_duration.nil? %>
-                              <%= detail_task.time_duration %>hr 
-                            <% end %>
-                            <% if !detail_task.date.nil? %>
-                              <%= detail_task.date %>
-                            <% end %>
-                          <span>
-                        </div>
-                      </div>
-                    </li>
-                  <% end %>
-                </ul>
-                <div style="display: flex; justify-content: flex-end;">
-                  <button class="add_button" id="showDetailTaskForm<%= sub_task.id %>"
-                    onClick='showDetailTaskForm(<%= sub_task.id %>)'>+</button>
-                </div>
-                <div id="detailTaskForm<%= sub_task.id %>" style="display: none;">
-                  <%= form_for :detail_task, url: sub_task_detail_tasks_path(sub_task), remote: true do |form| %>
-                    <div>
-                      <%= form.text_area :text, placeholder: '小タスク', class: "detail-task-text-input", rows: "3" %>
-                    </div>
-                    <div class="detal-task-option-field">
-                      <div>
-                        <%= form.date_field :date, class: "detail-task-date-input" %>
-                      </div>
-                      <div>
-                        <button class="hide_button" id="hideDetailTaskForm<%= sub_task.id %>" style="display: none;" type="button"
-                          onClick='hideDetailTaskForm(<%= sub_task.id %>)'>x</button>
-                        <%= form.submit "追加", class: "add-detail-task-button" %>
-                      </div>
-                    </div>
-                  <% end %>
-                </div>
-              </div>
             </div>
-          <% end %>
-          <button class="show-sub-task-button" id="showSubTaskForm<%= major_task.id%>" type="button"
-            onClick='showSubTaskForm(<%= major_task.id %>)'>タスクを追加</button>
-          <div id='subTaskForm<%= major_task.id %>' style='display: none;'>
-            <%= form_for ([MajorTask.find(major_task.id), MajorTask.find(major_task.id).sub_tasks.build]) do |form| %>
-              <%= form.text_area :text, placeholder: '中タスク', class: "sub-task-text-input", rows: "3" %>
-              <div class="sub-task-option-field">
-                <div><%= form.date_field :start_date, class: "sub-task-date-input" %></div>
-                <div>~</div>
-                <div><%= form.date_field :end_date, class: "sub-task-date-input" %></div>
-              </div>
-              <div class="sub-task-button-field">
-                <button class="hide_button" id="hideSubTaskForm<%= major_task.id %>" style="display: none;" type="button"
-                  onClick='hideSubTask(<%= major_task.id %>)'>✖️</button>
-                <%= form.submit "追加", class: "add-task-button" %>
+            <% MajorTask.find(major_task.id).sub_tasks.where("start_date <= ?", Date.today).each do |sub_task| %>
+              <div class="sub-task-box">
+                <div class="sub-task-title">
+                  <%= sub_task.text %>
+                </div>
+                <div class="sub-task-box-summary">
+                  <% if !sub_task.time_duration.nil? %>
+                    <%= sub_task.time_duration %>hr
+                  <% end %>
+                  <% if !sub_task.start_date.nil? %>
+                    <%= sub_task.start_date %> ~ <%= sub_task.end_date %>
+                  <% end %>
+                </div>
+                <div class="detail-task-box">
+                  <ul id=detail-task-list-<%= sub_task.id %>>
+                    <% SubTask.find(sub_task.id).detail_tasks.each do |detail_task| %>
+                      <li>
+                        <div class="detail-task-item">
+                          <div class="detail-task-name">
+                            <%= detail_task.text %>
+                          </div>
+                          <div class="detail-task-summery">
+                            <span class="detail-task-summery-item">
+                              <% if !detail_task.time_duration.nil? %>
+                                <%= detail_task.time_duration %>hr 
+                              <% end %>
+                              <% if !detail_task.date.nil? %>
+                                <%= detail_task.date %>
+                              <% end %>
+                            <span>
+                          </div>
+                        </div>
+                      </li>
+                    <% end %>
+                  </ul>
+                  <div style="display: flex; justify-content: flex-end;">
+                    <button class="add_button" id="showDetailTaskForm<%= sub_task.id %>"
+                      onClick='showDetailTaskForm(<%= sub_task.id %>)'>+</button>
+                  </div>
+                  <div id="detailTaskForm<%= sub_task.id %>" style="display: none;">
+                    <%= form_for :detail_task, url: sub_task_detail_tasks_path(sub_task), remote: true do |form| %>
+                      <div>
+                        <%= form.text_area :text, placeholder: '小タスク', class: "detail-task-text-input", rows: "3" %>
+                      </div>
+                      <div class="detal-task-option-field">
+                        <div>
+                          <%= form.date_field :date, class: "detail-task-date-input" %>
+                        </div>
+                        <div>
+                          <button class="hide_button" id="hideDetailTaskForm<%= sub_task.id %>" style="display: none;" type="button"
+                            onClick='hideDetailTaskForm(<%= sub_task.id %>)'>x</button>
+                          <%= form.submit "追加", class: "add-detail-task-button" %>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
               </div>
             <% end %>
+            <button class="show-sub-task-button" id="showSubTaskForm<%= major_task.id%>" type="button"
+              onClick='showSubTaskForm(<%= major_task.id %>)'>タスクを追加</button>
+            <div id='subTaskForm<%= major_task.id %>' style='display: none;'>
+              <%= form_for ([MajorTask.find(major_task.id), MajorTask.find(major_task.id).sub_tasks.build]) do |form| %>
+                <%= form.text_area :text, placeholder: '中タスク', class: "sub-task-text-input", rows: "3" %>
+                <div class="sub-task-option-field">
+                  <div><%= form.date_field :start_date, class: "sub-task-date-input" %></div>
+                  <div>~</div>
+                  <div><%= form.date_field :end_date, class: "sub-task-date-input" %></div>
+                </div>
+                <div class="sub-task-button-field">
+                  <button class="hide_button" id="hideSubTaskForm<%= major_task.id %>" style="display: none;" type="button"
+                    onClick='hideSubTask(<%= major_task.id %>)'>✖️</button>
+                  <%= form.submit "追加", class: "add-task-button" %>
+                </div>
+              <% end %>
+            </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
     <div class="add-major-task-field">
       <button class="show-sub-task-button" id="showMajorTaskForm" type="button" style="margin-top: 8px;"
         onClick='showMajorTaskForm()'>リストを追加</button>
