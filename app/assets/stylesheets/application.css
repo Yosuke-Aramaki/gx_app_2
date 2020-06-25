@@ -30,7 +30,7 @@ body {
   background-color: rgba(45,45,45, 0.32);
   opacity: 0.32;
   display: flex;
-  justify-content: space-between
+  justify-content: space-between;
 }
 
 .logo-header {
@@ -221,6 +221,7 @@ li {
 
 .detail-task-item {
   display: flex;
+  justify-content: space-between;
 }
 
 .detail-task-name {
@@ -229,6 +230,11 @@ li {
 
 .detail-task-summery {
   font-size: 9px;
+  vertical-align: sub;
+}
+
+.detail-task-summery {
+  vertical-align: sub;
 }
 
 .detail-task-text-input {

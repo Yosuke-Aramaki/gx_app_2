@@ -1,17 +1,35 @@
-
+console.log("1")
+console.log("1")
 var ul1 = document.getElementById("detail-task-list-<%= @detail_task.sub_task_id %>")
+console.log("1")
 var li1 = document.createElement("li")
 var div1 = document.createElement("div")
 div1.classList.add("detail-task-item");
 var div2 = document.createElement("div")
 div2.classList.add("detail-task-name");
+console.log("1")
 var text1 = document.createTextNode("<%= @detail_task.text %>");
-div2.appendChild(text1)
-div1.appendChild(div2)
-li1.appendChild(div1)
-ul1.appendChild(li1)
-<% if @detail_task.time_duration.nil? && @detail_task.date.nil? %>
-  
+console.log("1")
+div2.appendChild(text1);
+div1.appendChild(div2);
+li1.appendChild(div1);
+ul1.appendChild(li1);
+console.log("1")
+<% if !@detail_task.time_duration.nil? || !@detail_task.date.nil? %>
+  var div3 = document.createElement("div");
+  div3.classList.add("detail-task-summery");
+  var span1 = document.createElement("span");
+  span1.classList.add("detail-task-summery-item");
+  <% if !@detail_task.time_duration.nil? %>
+    var text2 = document.createTextNode('<%= @detail_task.time_duration %>hr ')
+    span1.appendChild(text2)
+  <% end %>
+  <% if !@detail_task.date.nil? %>
+    var text3 = document.createTextNode('<%= @detail_task.date %>')
+    span1.appendChild(text3)
+  <% end %>
+  div3.appendChild(span1)
+  div1.appendChild(div3)
 <% end %>
 document.getElementById('detailTaskForm' + <%= @detail_task.sub_task_id %>).style.display = 'none';
 document.getElementById('showDetailTaskForm' + <%= @detail_task.sub_task_id %>).style.display = 'inline-block';

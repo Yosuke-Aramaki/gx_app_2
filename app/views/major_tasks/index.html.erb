@@ -39,11 +39,14 @@
                           <%= detail_task.text %>
                         </div>
                         <div class="detail-task-summery">
-                          <% if !detail_task.time_duration.nil? && !detail_task.date.nil? %>
-                            <span style="vertical-align: sub;">
-                              <%= detail_task.time_duration %>hr <%= detail_task.date %> 
-                            <span>
-                          <% end %>
+                          <span class="detail-task-summery-item">
+                            <% if !detail_task.time_duration.nil? %>
+                              <%= detail_task.time_duration %>hr 
+                            <% end %>
+                            <% if !detail_task.date.nil? %>
+                              <%= detail_task.date %>
+                            <% end %>
+                          <span>
                         </div>
                       </div>
                     </li>
