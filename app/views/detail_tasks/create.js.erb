@@ -1,12 +1,18 @@
 
-  var ul1 = document.getElementById("detail-task-list")
-  var li1 = document.createElement("li")
-  var div1 = document.createElement("div")
-  div1.classList.add("detail-task-item");
-  var div2 = document.createElement("div")
-  div2.classList.add("detail-task-name");
-  var text1 = document.createTextNode(<%= @detail_task.text %>);
-  div2.appendChild(text1)
-  div1.appendChild(div2)
-  li1.appendChild(div1)
-  ul1.appendChild(li1)
+var ul1 = document.getElementById("detail-task-list-<%= @detail_task.sub_task_id %>")
+var li1 = document.createElement("li")
+var div1 = document.createElement("div")
+div1.classList.add("detail-task-item");
+var div2 = document.createElement("div")
+div2.classList.add("detail-task-name");
+var text1 = document.createTextNode("<%= @detail_task.text %>");
+div2.appendChild(text1)
+div1.appendChild(div2)
+li1.appendChild(div1)
+ul1.appendChild(li1)
+<% if @detail_task.time_duration.nil? && @detail_task.date.nil? %>
+  
+<% end %>
+document.getElementById('detailTaskForm' + <%= @detail_task.sub_task_id %>).style.display = 'none';
+document.getElementById('showDetailTaskForm' + <%= @detail_task.sub_task_id %>).style.display = 'inline-block';
+document.getElementById('hideDetailTaskForm' + <%= @detail_task.sub_task_id %>).style.display = 'none';

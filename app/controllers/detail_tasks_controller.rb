@@ -22,7 +22,6 @@ class DetailTasksController < ApplicationController
       @major_task.update(time_duration: sumofMajorTask)
     end
     if @detail_task.save
-      # redirect_to root_path()
       respond_to do |format|
         format.js
         format.html { redirect_to root_path }
