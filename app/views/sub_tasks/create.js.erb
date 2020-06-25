@@ -1,4 +1,4 @@
-$("#sub-task-list").append("<%= escape_javascript(render partial: 'sub_task_section', locals: { sub_task: @sub_task }) %>");
-document.getElementById('subTaskForm' + @sub_task.major_task_id).style.display = 'none';
-document.getElementById('showSubTaskForm' + @sub_task.major_task_id).style.display = 'inline-block';
-document.getElementById('hideSubTaskForm' + @sub_task.major_task_id).style.display = 'none';
+$("#sub-task-list-<%= @sub_task.major_task_id %>").append("<%= escape_javascript(render partial: 'sub_task_section', locals: { sub_task: @sub_task }) %>");
+document.getElementById('subTaskForm' + <%= @sub_task.major_task_id %>).style.display = 'none';
+document.getElementById('showSubTaskForm' + <%= @sub_task.major_task_id %>).style.display = 'inline-block';
+document.getElementById('hideSubTaskForm' + <%= @sub_task.major_task_id %>).style.display = 'none';

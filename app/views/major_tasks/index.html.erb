@@ -18,8 +18,8 @@
                 <% end %>
               </div>
             </div>
-            <% MajorTask.find(major_task.id).sub_tasks.where("start_date <= ?", Date.today).each do |sub_task| %>
-              <div id="sub-task-list">
+            <div id="sub-task-list-<%= major_task.id %>">
+              <% MajorTask.find(major_task.id).sub_tasks.where("start_date <= ?", Date.today).each do |sub_task| %>
                 <div class="sub-task-box">
                   <div class="sub-task-title">
                     <%= sub_task.text %>
@@ -77,8 +77,8 @@
                     </div>
                   </div>
                 </div>
-              </div>
-            <% end %>
+              <% end %>
+            </div>
             <button class="show-sub-task-button" id="showSubTaskForm<%= major_task.id%>" type="button"
               onClick='showSubTaskForm(<%= major_task.id %>)'>タスクを追加</button>
             <div id='subTaskForm<%= major_task.id %>' style='display: none;'>
