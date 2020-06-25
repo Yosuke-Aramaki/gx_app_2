@@ -162,6 +162,7 @@
                   <div style="vertical-align : top;">
                     <%= form.text_area :text, placeholder: 'やったこと', class: "done-task-text-input", rows: "2" %>
                     <%= form.number_field :time_duration, placeholder: 'かかった時間', class: "done-task-number-input" %>
+                    <%= form.date_field :date, value: Date.today, class: "hide" %>
                   </div>
                   <div class="sub-task-button-field">
                     <input class="hide_button" id="hideDetailTaskFormDayButton<%= sub_task_today.id %>" type="button" value="✖️"

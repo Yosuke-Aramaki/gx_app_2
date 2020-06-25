@@ -399,3 +399,7 @@ li {
   border: 0;
   vertical-align : top;
 }
+
+.hide {
+  display: none;
+}
