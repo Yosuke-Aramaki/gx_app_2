@@ -100,7 +100,7 @@
       <button class="show-sub-task-button" id="showMajorTaskForm" type="button" style="margin-top: 8px;"
         onClick='showMajorTaskForm()'>リストを追加</button>
       <div class="" id="majorTaskForm" style='display: none;'>
-        <%= form_for @major_task, url: user_major_tasks_path(@user) do |form| %>
+        <%= form_for @major_task, url: user_major_tasks_path(@user), remote: true do |form| %>
           <%= form.text_area :text, placeholder: '大タスク', class: "sub-task-text-input", rows: "3" %>
           <div class="sub-task-option-field">
             <div><%= form.date_field :start_date, class: "sub-task-date-input" %></div>

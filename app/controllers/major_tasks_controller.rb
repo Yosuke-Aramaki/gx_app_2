@@ -20,7 +20,10 @@ class MajorTasksController < ApplicationController
     @major_task = MajorTask.new(major_task_params)
     @major_task.user_id = current_user.id
     if @major_task.save
-      redirect_to root_path
+      respond_to do |format|
+        format.js
+        format.html { redirect_to root_path }
+      end
     end
   end
 
