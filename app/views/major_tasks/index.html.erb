@@ -136,11 +136,13 @@
             <div class="sub-task-title">
               <%= sub_task_today.text %>
             </div>
-            <ul>
+            <ul id=detail-task-list-today-<%= sub_task_today.id %>>
               <% SubTask.find(sub_task_today.id).detail_tasks.each do |detail_task_day| %>
                 <li>
-                  <div style="display: flex; justify-content: space-between;">
-                    <%= detail_task_day.text %>
+                  <div class="detail-task-item">
+                    <div class="detail-task-name">
+                      <%= detail_task_day.text %>
+                    </div>
                     <div class="detail-task-summery">
                       <% if detail_task_day.time_duration.nil? %>
                         <%= form_for :detail_task, url: sub_task_detail_task_path(sub_task_today.id, id: detail_task_day.id), method: "PUT" do |form| %>
@@ -157,7 +159,7 @@
             <input class="add-done-task-button" id="showDetailTaskFormDayButton<%= sub_task_today.id %>" type="button" value="+ 今日やったこと"
               onClick='showDetailTaskFormDay(<%= sub_task_today.id %>)'>
             <div id='detailTaskFormDay<%= sub_task_today.id %>' style='display: none;'>
-              <%= form_for ([SubTask.find(sub_task_today.id), SubTask.find(sub_task_today.id).detail_tasks.build]) do |form| %>
+              <%= form_for ([SubTask.find(sub_task_today.id), SubTask.find(sub_task_today.id).detail_tasks.build]), remote: true do |form| %>
                 <div>
                   <div style="vertical-align : top;">
                     <%= form.text_area :text, placeholder: 'やったこと', class: "done-task-text-input", rows: "2" %>

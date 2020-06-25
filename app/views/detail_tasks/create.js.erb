@@ -24,7 +24,18 @@ ul1.appendChild(li1);
   <% end %>
   div3.appendChild(span1)
   div1.appendChild(div3)
+
+  <% if @detail_task.date == Date.today %>
+    var ul2 = document.getElementById("detail-task-list-today-<%= @detail_task.sub_task_id %>")
+    span1.removeChild(text3)
+    ul2.appendChild(li1);
+    document.getElementById('detailTaskFormDay' + <%= @detail_task.sub_task_id %>).style.display = 'none';
+    document.getElementById('showDetailTaskFormDayButton' + <%= @detail_task.sub_task_id %>).style.display = 'inline-block';
+    document.getElementById('hideDetailTaskFormDayButton' + <%= @detail_task.sub_task_id %>).style.display = 'none';
+  <% end %>
 <% end %>
+
 document.getElementById('detailTaskForm' + <%= @detail_task.sub_task_id %>).style.display = 'none';
 document.getElementById('showDetailTaskForm' + <%= @detail_task.sub_task_id %>).style.display = 'inline-block';
 document.getElementById('hideDetailTaskForm' + <%= @detail_task.sub_task_id %>).style.display = 'none';
+
