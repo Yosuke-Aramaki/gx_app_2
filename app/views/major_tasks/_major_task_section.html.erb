@@ -8,7 +8,10 @@
         <%= major_task.time_duration %>hr
       <% end %>
       <% if !major_task.start_date.nil? %>
-        <%= major_task.start_date %> ~ <%= major_task.end_date %>
+        <%= major_task.start_date.year %>/<%= major_task.start_date.month %>/<%= major_task.start_date.mday %> ~ 
+      <% end %>
+      <% if !major_task.end_date.nil? %>
+        <%= major_task.end_date.year %>/<%= major_task.end_date.month %>/<%= major_task.end_date.mday %>
       <% end %>
     </div>
   </div>

@@ -14,7 +14,10 @@
                   <%= major_task.time_duration %>hr
                 <% end %>
                 <% if !major_task.start_date.nil? %>
-                  <%= major_task.start_date %> ~ <%= major_task.end_date %>
+                  <%= major_task.start_date.year %>/<%= major_task.start_date.month %>/<%= major_task.start_date.mday %> ~ 
+                <% end %>
+                <% if !major_task.end_date.nil? %>
+                  <%= major_task.end_date.year %>/<%= major_task.end_date.month %>/<%= major_task.end_date.mday %>
                 <% end %>
               </div>
             </div>
@@ -29,7 +32,10 @@
                       <%= sub_task.time_duration %>hr
                     <% end %>
                     <% if !sub_task.start_date.nil? %>
-                      <%= sub_task.start_date %> ~ <%= sub_task.end_date %>
+                      <%= sub_task.start_date.year %>/<%= sub_task.start_date.month %>/<%= sub_task.start_date.mday %> ~ 
+                    <% end %>
+                    <% if !sub_task.end_date.nil? %>
+                      <%= sub_task.end_date.year %>/<%= sub_task.end_date.month %>/<%= sub_task.end_date.mday %>
                     <% end %>
                   </div>
                   <div class="detail-task-box">
@@ -46,7 +52,7 @@
                                   <%= detail_task.time_duration %>hr 
                                 <% end %>
                                 <% if !detail_task.date.nil? %>
-                                  <%= detail_task.date %>
+                                  <%= detail_task.date.month %>/<%= detail_task.date.mday %>
                                 <% end %>
                               <span>
                             </div>
@@ -167,7 +173,7 @@
                 <div>
                   <div style="vertical-align : top;">
                     <%= form.text_area :text, placeholder: 'やったこと', class: "done-task-text-input", rows: "2" %>
-                    <%= form.number_field :time_duration, placeholder: 'かかった時間', class: "done-task-number-input" %>
+                    <%= form.number_field :time_duration, placeholder: '時間', class: 'done-task-time-input' %><span class="done-task-time-unit">hr</span>
                     <%= form.date_field :date, value: Date.today, class: "hide" %>
                   </div>
                   <div class="sub-task-button-field">

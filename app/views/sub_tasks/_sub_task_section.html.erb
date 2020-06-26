@@ -7,7 +7,10 @@
       <%= sub_task.time_duration %>hr
     <% end %>
     <% if !sub_task.start_date.nil? %>
-      <%= sub_task.start_date %> ~ <%= sub_task.end_date %>
+      <%= sub_task.start_date.year %>/<%= sub_task.start_date.month %>/<%= sub_task.start_date.mday %> ~ 
+    <% end %>
+    <% if !sub_task.end_date.nil? %>
+      <%= sub_task.end_date.year %>/<%= sub_task.end_date.month %>/<%= sub_task.end_date.mday %>
     <% end %>
   </div>
   <div class="detail-task-box">

@@ -206,11 +206,13 @@ body {
 }
 
 .sub-task-title {
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: 500;
 }
 
 .sub-task-box-summary {
   font-size: 9px;
+  margin-top: 3px;
   margin-left: 5px;
 }
 
@@ -220,7 +222,7 @@ ul {
 }
 
 li {
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .detail-task-item {
@@ -395,12 +397,17 @@ li {
 
 .done-task-text-input {
   border: 0;
-  width: 150px;
+  width: 190px;
 }
 
 .done-task-time-input {
   width: 35px;
   border: 0;
+  vertical-align : top;
+}
+
+.done-task-time-unit {
+  font-size: 11px;
   vertical-align : top;
 }
 
