@@ -34,7 +34,7 @@ ul1.appendChild(li1);
     document.getElementById('hideDetailTaskFormDayButton' + <%= @detail_task.sub_task_id %>).style.display = 'none';
   <% end %>
 <% end %>
-
+$('detailTaskForm' + <%= @detail_task.sub_task_id %>)[0].reset();
 document.getElementById('detailTaskForm' + <%= @detail_task.sub_task_id %>).style.display = 'none';
 document.getElementById('showDetailTaskForm' + <%= @detail_task.sub_task_id %>).style.display = 'inline-block';
 document.getElementById('hideDetailTaskForm' + <%= @detail_task.sub_task_id %>).style.display = 'none';
