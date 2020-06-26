@@ -163,6 +163,7 @@ body {
 
 .task-list {
   display: flex;
+  margin-bottom: 10px;
 }
 
 .task-box {
@@ -172,6 +173,7 @@ body {
   background-color: #F9F7F5;
   border-top: 10px solid #7BC86C;
   border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px 0px;
 }
 
 .task-box-header {
@@ -358,6 +360,7 @@ li {
   background-color: #F9F7F5;
   border-top: 10px solid #7BC86C;
   border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px 0px;
 }
 
 .date-field {
