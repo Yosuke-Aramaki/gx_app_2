@@ -177,6 +177,22 @@ body {
 }
 
 .task-box-header {
+  margin: 10px 16px;
+}
+
+.major-task-name {
+  font-size: 15px;
+  font-weight: 600;
+  bottom: 0;
+}
+
+.major-task-box-summary {
+  font-size: 9px;
+  bottom: 0;
+  right: 5px;
+}
+
+/* .task-box-header {
   margin: 0px 16px 8px 16px;
   height: 40px;
   display: flex;
@@ -196,7 +212,7 @@ body {
   position: absolute;
   bottom: 0;
   right: 5px;
-}
+} */
 
 .sub-task-box {
   width: 250px;
