@@ -10,6 +10,7 @@
 ```
 git clone git@github.com:Yosuke-Aramaki/pilee.git
 cd pilee
+git checkout develop
 ```
 
 ### MySQLのインストールと設定
@@ -36,7 +37,7 @@ mysql> select User,Host from mysql.user;　//作業ユーザーが作成でき�
 
 データベース設定ファイルを作成します
 ```
-touch /config/database.yml
+touch config/database.yml
 ```
 
 作業ユーザー名とパスワードを指定して作成されたファイルを下記の内容に書き換えます
