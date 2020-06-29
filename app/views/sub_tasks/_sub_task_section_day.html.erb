@@ -6,7 +6,7 @@
     <% SubTask.find(sub_task_today.id).detail_tasks.where("date = ?", Date.today ).each do |detail_task_day| %>
       <li>
         <div class="detail-task-item">
-          <div class="detail-task-name">
+          <div class="detail-task-name" style="all: initial;">
             ・<%= detail_task_day.text %>
           </div>
           <div class="detail-task-summery">

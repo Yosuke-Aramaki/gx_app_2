@@ -28,7 +28,7 @@
                     <%= detail_task.time_duration %>hr 
                   <% end %>
                   <% if !detail_task.date.nil? %>
-                    <%= detail_task.date %>
+                    <%= detail_task.date.month %>/<%= detail_task.date.mday %>
                   <% end %>
                 <span>
               </div>
