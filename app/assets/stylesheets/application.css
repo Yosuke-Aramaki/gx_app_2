@@ -236,7 +236,8 @@ body {
 
 ul {
   margin: 8px 0px;
-  padding-inline-start: 20px;
+  padding-inline-start: 5px;
+  list-style: none;
 }
 
 li {
@@ -254,11 +255,7 @@ li {
 
 .detail-task-summery {
   font-size: 9px;
-  vertical-align: sub;
-}
-
-.detail-task-summery {
-  vertical-align: sub;
+  padding-top: 4px;
 }
 
 .detail-task-text-input {
@@ -432,4 +429,28 @@ li {
 
 .hide {
   display: none;
+}
+
+/* ============== day task ================= */
+
+#modal-content{
+  display: none;
+	width:50%;
+	margin:1.5em auto 0;
+	padding:10px 20px;
+	border:2px solid #aaa;
+	background:#fff;
+  z-index:2;
+  position: fixed;
+  transform:translate(-50%, -50%);
+}
+
+.button-link{
+	color:#00f;
+	text-decoration:underline;
+}
+ 
+.button-link:hover{
+	cursor:pointer;
+	color:#f00;
 }
