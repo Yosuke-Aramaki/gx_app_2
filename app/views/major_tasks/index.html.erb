@@ -54,18 +54,25 @@
   </div>
 <% end %>
 
-<div id="modal-content">
-	<p>「閉じる」か「背景」をクリックするとモーダルウィンドウを終了します。</p>
+<div id="detail-task-modal-content">
 	<p><a id="modal-close" class="button-link">閉じる</a></p>
+	<p></p>
 </div>
-<div id="modal-overlay"></div>
 <p><a id="modal-open" class="button-link">クリックするとモーダルウィンドウを開きます。</a></p>
 
 <script> 
-  $("#modal-open").click(function(e){  
-    console.log(e.pageX)
-    $('#modal-content').css({'top':e.pageY + 'px','left':e.pageX + 300 + 'px'});
-    $("#modal-content").fadeIn();
+  function showDetailTaskModal(detail) {
+    console.log(detail)
+    // $('#modal-content').css({'top':e.clientY + 'px','left':e.clientX + 'px'});
+    // $("#modal-content").fadeIn();
+    // return false;
+  }
+
+  $(".detail-task-modal-syncer").click(function(e){  
+    let target = $(this).data('modal-link');
+    $('#detail-task-modal-content').css({'top':e.clientY + 'px','left':e.clientX + 'px'});
+
+    $("#detail-task-modal-content").fadeIn();
     return false;
   });
   

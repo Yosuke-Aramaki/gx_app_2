@@ -421,7 +421,6 @@ li {
 	background:#fff;
   z-index:2;
   position: fixed;
-  transform:translate(-50%, -50%);
 }
 
 .button-link{
