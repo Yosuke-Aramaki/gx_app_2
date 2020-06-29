@@ -27,6 +27,9 @@ class MajorTasksController < ApplicationController
     end
   end
 
+  def detail_task_modal
+  end
+
   private
   def major_task_params
     params.require(:major_task).permit(:text, :start_date, :end_date, :time_duration)

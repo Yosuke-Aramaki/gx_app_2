@@ -54,10 +54,14 @@
   </div>
 <% end %>
 
-<div id="detail-task-modal-content">
-	<p><a id="modal-close" class="button-link">閉じる</a></p>
-	<p></p>
+<div id="detail-task-modal-content" class='detail-task-modal-content'>
+  <p><i id="modal-close" class="fa fa-times" aria-hidden="true"></i></p>
+  <%= form_for :detail_task, url: sub_task_detail_task_path(1, id: 1), method: "PUT" do |form| %>
+    <span><%= form.date_field :date, placeholder: '時間' %><span>
+    <%= form.submit "更新" %>
+  <% end %>
 </div>
+
 <p><a id="modal-open" class="button-link">クリックするとモーダルウィンドウを開きます。</a></p>
 
 <script> 
@@ -71,14 +75,15 @@
   $(".detail-task-modal-syncer").click(function(e){  
     let target = $(this).data('modal-link');
     $('#detail-task-modal-content').css({'top':e.clientY + 'px','left':e.clientX + 'px'});
-
+    $('#detail-task-modal-content form').attr('action', "/sub_tasks/" + target.split("-")[0] + "/detail_tasks/" + target.split("-")[1] )   
+    $("#detail-task-title").text($('#' + target + ' .detail-task-name').text())
     $("#detail-task-modal-content").fadeIn();
     return false;
   });
   
   // モーダルウィンドウが閉じるときの処理    
   $("#modal-close").unbind().click(function(){
-    $(this).parents("#modal-content").fadeOut();
+    $(this).parents("#detail-task-modal-content").fadeOut();
     return false;
   }); 
 
