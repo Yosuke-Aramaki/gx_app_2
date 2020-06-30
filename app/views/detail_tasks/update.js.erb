@@ -1,0 +1,5 @@
+$('#detail-task-item-' + <%= @detail_task.id %> + ' .detail-task-name').text('・<%= DetailTask.find(@detail_task.id).text %>')
+<% if @detail_task.date == Date.today %>
+  
+<% end %>
+$("#detail-task-modal-section").fadeOut();

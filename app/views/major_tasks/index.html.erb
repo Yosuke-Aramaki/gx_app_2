@@ -71,18 +71,15 @@
       },
     })
     .done(function(response){
-      // Railsのアクションが正しく実行された時の処理
     })
     .fail(function(xhr){
-      // Railsのアクションなどでエラーが発生した時の処理
     });
     $("#detail-task-modal-section").fadeIn();
     return false;
   });
   
-  // モーダルウィンドウが閉じるときの処理    
   $("#modal-close").unbind().click(function(){
-    $(this).parents("#detail-task-modal-content").fadeOut();
+    $(this).parents("#detail-task-modal-section").fadeOut();
     return false;
   }); 
 
