@@ -5,7 +5,7 @@
   <ul id=detail-task-list-today-<%= sub_task_today.id %>>
     <% SubTask.find(sub_task_today.id).detail_tasks.where("date = ?", Date.today ).each do |detail_task_day| %>
       <li>
-        <div class="detail-task-item">
+        <div data-modal-link="<%= detail_task_day.id %>" id="detail-task-item-<%= detail_task_day.id %>" class="detail-task-item detail-task-modal-syncer">
           <div class="detail-task-name">
             ・<%= detail_task_day.text %>
           </div>

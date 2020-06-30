@@ -417,7 +417,7 @@ li {
   display: none;
 }
 
-/* ============== day task ================= */
+/* ============== modal task ================= */
 
 .detail-task-modal-content{
   display: none;
@@ -431,12 +431,3 @@ li {
   position: fixed;
 }
 
-.button-link{
-	color:#00f;
-	text-decoration:underline;
-}
- 
-.button-link:hover{
-	cursor:pointer;
-	color:#f00;
-}

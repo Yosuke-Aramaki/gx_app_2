@@ -18,7 +18,7 @@
       <ul id=detail-task-list-<%= sub_task.id %>>
         <% SubTask.find(sub_task.id).detail_tasks.each do |detail_task| %>
           <li>
-            <div data-modal-link="<%= detail_task.sub_task_id %>-<%= detail_task.id %>" id="detail-task-item-<%= detail_task.id %>" class="detail-task-item detail-task-modal-syncer">
+            <div data-modal-link="<%= detail_task.id %>" id="detail-task-item-<%= detail_task.id %>" class="detail-task-item detail-task-modal-syncer">
               <div class="detail-task-name">
                 ・<%= detail_task.text %>
               </div>

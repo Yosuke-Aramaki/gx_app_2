@@ -64,10 +64,10 @@
     // $('#detail-task-modal-section form').attr('action', "/sub_tasks/" + target.split("-")[0] + "/detail_tasks/" + target.split("-")[1] )   
     // $("#detail-task-title").text($('#' + target + ' .detail-task-name').text())
     $.ajax({
-      url: '/detail_tasks/'+ target.split("-")[1] +'/detail_task_modal',
+      url: '/detail_tasks/'+ target +'/detail_task_modal',
       type: 'GET',
       data: {
-        id: target.split("-")[1]
+        id: target
       },
     })
     .done(function(response){
