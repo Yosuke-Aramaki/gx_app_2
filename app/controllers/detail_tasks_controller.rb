@@ -32,7 +32,6 @@ class DetailTasksController < ApplicationController
     # render plain: params.inspect
     @sub_task = SubTask.find(params[:sub_task_id])
     @detail_task = DetailTask.find(params[:id])
-    @detail_task.time_duration = params[:detail_task][:time_duration]
     @major_task = MajorTask.find(@sub_task.major_task_id)
     if @sub_task.time_duration.nil? 
       @sub_task.update(time_duration: params[:detail_task][:time_duration])
@@ -45,8 +44,19 @@ class DetailTasksController < ApplicationController
       sumofMajorTask = @major_task.time_duration + params[:detail_task][:time_duration].to_f
       @sub_task.update(time_duration: sumofMajorTask)
     end
-    if @detail_task.update(time_duration: params[:detail_task][:time_duration], date: Date.today)
-      redirect_to root_path()
+    if @detail_task.update(detail_task_params)
+      respond_to do |format|
+        format.js
+        format.html { redirect_to root_path }
+      end
+    end
+  end
+
+  def detail_task_modal
+    @detail_task = DetailTask.find(params[:id])
+    respond_to do |format|
+      format.js
+      format.html { redirect_to root_path }
     end
   end
 

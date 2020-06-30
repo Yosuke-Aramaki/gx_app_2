@@ -234,6 +234,7 @@ li {
 
 .detail-task-name {
   width: 180px;
+  cursor: pointer;
   white-space: initial;
 }
 
@@ -249,7 +250,7 @@ li {
 }
 
 .detail-task-date-input {
-  width: 100px;
+  width: 160px;
 }
 
 .detal-task-option-field {
@@ -368,6 +369,7 @@ li {
 
 .major-task-name-day {
   margin: 0px 20px;
+  margin-top: 10px;
 }
 
 .sub-task-box-day {

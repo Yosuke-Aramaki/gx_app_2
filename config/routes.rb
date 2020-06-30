@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   end
 
   resources :detail_tasks do
+    get :detail_task_modal, on: :member
   end
 
   resources :sessions do
