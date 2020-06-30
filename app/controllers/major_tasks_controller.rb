@@ -5,8 +5,7 @@ class MajorTasksController < ApplicationController
       @major_task = MajorTask.new
       @user = current_user
       require 'date'
-      today = Date.today
-      @sub_task_list_today = @user.sub_tasks.where("start_date <= ?", today ).order(:major_task_id)
+      @sub_task_list_today = @user.sub_tasks.where("start_date >= ?", Date.today ).order(:major_task_id)
       @sub_task_list_today
     end
   end

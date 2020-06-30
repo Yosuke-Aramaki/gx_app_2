@@ -35,18 +35,15 @@
       <p class="date-field" id="date"></span>
       <% if @sub_task_list_today.any? %>
         <% @sub_task_list_today.each_with_index do |sub_task_today, i| %>
-          <% if i > 0 && @sub_task_list_today[i-1].major_task_id != @sub_task_list_today[i].major_task_id %>
-            <p class="major-task-name-day"><%= MajorTask.find(@sub_task_list_today[i].major_task_id).text %></p>
+          <% if i > 0 && (@sub_task_list_today[i-1].major_task_id == @sub_task_list_today[i].major_task_id) %>
             <div id=sub-task-list-day-<%= @sub_task_list_today[i].major_task_id %>>
               <%= render partial: 'sub_tasks/sub_task_section_day', locals: {sub_task_today: sub_task_today } %>
             </div>
           <% else %>
-            <% if i == 0 %>
-              <p class="major-task-name-day"><%= MajorTask.find(@sub_task_list_today[i].major_task_id).text %></p>
-              <div id=sub-task-list-day-<%= @sub_task_list_today[i].major_task_id %>>
-                <%= render partial: 'sub_tasks/sub_task_section_day', locals: {sub_task_today: sub_task_today } %>
-              </div>
-            <% end %>
+            <p class="major-task-name-day"><%= MajorTask.find(@sub_task_list_today[i].major_task_id).text %></p>
+            <div id=sub-task-list-day-<%= @sub_task_list_today[i].major_task_id %>>
+              <%= render partial: 'sub_tasks/sub_task_section_day', locals: {sub_task_today: sub_task_today } %>
+            </div>
           <% end %>
         <% end %>
       <% end %>
