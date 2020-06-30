@@ -431,3 +431,15 @@ li {
   position: fixed;
 }
 
+.modal-option {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-option > i {
+  cursor: pointer;
+}
+
+.delete-link {
+  
+}

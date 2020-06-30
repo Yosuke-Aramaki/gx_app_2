@@ -52,6 +52,11 @@ class DetailTasksController < ApplicationController
     end
   end
 
+  def destroy
+    @detail_task = DetailTask.find(params[:id])
+    @detail_task.destroy
+  end
+
   def detail_task_modal
     @detail_task = DetailTask.find(params[:id])
     respond_to do |format|

@@ -52,7 +52,12 @@
 <% end %>
 
 <div id="detail-task-modal-section" class='detail-task-modal-content'>
-  <p><i id="modal-close" class="fa fa-times" aria-hidden="true"></i></p>
+  <div class="modal-option" >
+    <%= link_to(detail_task_path(id: 1), method: :delete, data: { confirm: 'Sure' }, class: "delete-link") do %>
+      <i class="fa fa-trash" aria-hidden="true"></i>
+    <% end %>
+    <i id="modal-close" class="fa fa-times" aria-hidden="true"></i>
+  </div>
   <div id="detail-task-modal-content">
   </div>
 </div>
@@ -61,7 +66,7 @@
   $(".detail-task-modal-syncer").click(function(e){  
     let target = $(this).data('modal-link');
     $('#detail-task-modal-section').css({'top':e.clientY + 'px','left':e.clientX + 'px'});
-    // $('#detail-task-modal-section form').attr('action', "/sub_tasks/" + target.split("-")[0] + "/detail_tasks/" + target.split("-")[1] )   
+    $('.modal-option a').attr('href', "/detail_tasks/" + target )   
     // $("#detail-task-title").text($('#' + target + ' .detail-task-name').text())
     $.ajax({
       url: '/detail_tasks/'+ target +'/detail_task_modal',
