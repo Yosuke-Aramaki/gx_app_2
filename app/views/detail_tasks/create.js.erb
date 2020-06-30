@@ -1,41 +1,12 @@
-var ul1 = document.getElementById("detail-task-list-<%= @detail_task.sub_task_id %>")
-var li1 = document.createElement("li")
-var div1 = document.createElement("div")
-div1.classList.add("detail-task-item");
-var div2 = document.createElement("div")
-div2.classList.add("detail-task-name");
-var text1 = document.createTextNode("<%= @detail_task.text %>");
-div2.appendChild(text1);
-div1.appendChild(div2);
-li1.appendChild(div1);
-ul1.appendChild(li1);
-<% if !@detail_task.time_duration.nil? || !@detail_task.date.nil? %>
-  var div3 = document.createElement("div");
-  div3.classList.add("detail-task-summery");
-  var span1 = document.createElement("span");
-  span1.classList.add("detail-task-summery-item");
-  <% if !@detail_task.time_duration.nil? %>
-    var text2 = document.createTextNode('<%= @detail_task.time_duration %>hr ')
-    span1.appendChild(text2)
-  <% end %>
-  <% if !@detail_task.date.nil? %>
-    var text3 = document.createTextNode('<%= @detail_task.date %>')
-    span1.appendChild(text3)
-  <% end %>
-  div3.appendChild(span1)
-  div1.appendChild(div3)
 
-  <% if @detail_task.date == Date.today %>
-    var ul2 = document.getElementById("detail-task-list-today-<%= @detail_task.sub_task_id %>")
-    span1.removeChild(text3)
-    ul2.appendChild(li1);
-    document.getElementById('detailTaskFormDay' + <%= @detail_task.sub_task_id %>).style.display = 'none';
-    document.getElementById('showDetailTaskFormDayButton' + <%= @detail_task.sub_task_id %>).style.display = 'inline-block';
-    document.getElementById('hideDetailTaskFormDayButton' + <%= @detail_task.sub_task_id %>).style.display = 'none';
-  <% end %>
+$('#detail-task-list-' + <%= @detail_task.sub_task_id %>).append("<%= escape_javascript(render partial: 'detail_tasks/detail_task_section', locals: { detail_task: @detail_task }) %>");
+<% if (@detail_task.date == Date.today) && (SubTask.find(@detail_task.sub_task_id).start_date >= Date.today) %>
+  $('#detail-task-list-today-' + <%= @detail_task.sub_task_id %>).append("<%= escape_javascript(render partial: 'detail_tasks/detail_task_section_day', locals: { detail_task_day: @detail_task }) %>");
+  document.getElementById('detailTaskFormDay' + <%= @detail_task.sub_task_id %>).style.display = 'none';
+  document.getElementById('showDetailTaskFormDayButton' + <%= @detail_task.sub_task_id %>).style.display = 'inline-block';
+  document.getElementById('hideDetailTaskFormDayButton' + <%= @detail_task.sub_task_id %>).style.display = 'none';
 <% end %>
-$('detailTaskForm' + <%= @detail_task.sub_task_id %>)[0].reset();
+$('.new_detail_task')[0].reset();
 document.getElementById('detailTaskForm' + <%= @detail_task.sub_task_id %>).style.display = 'none';
 document.getElementById('showDetailTaskForm' + <%= @detail_task.sub_task_id %>).style.display = 'inline-block';
 document.getElementById('hideDetailTaskForm' + <%= @detail_task.sub_task_id %>).style.display = 'none';
-

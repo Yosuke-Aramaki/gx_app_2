@@ -193,6 +193,10 @@ body {
   right: 5px;
 }
 
+#majorTaskForm {
+  display: none;
+}
+
 .sub-task-box {
   width: 250px;
   margin: 0px 10px 8px 10px;
@@ -203,7 +207,7 @@ body {
 }
 
 .sub-task-title {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
 }
 

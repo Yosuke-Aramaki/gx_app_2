@@ -9,7 +9,7 @@
     <div class="add-major-task-field">
       <button class="show-sub-task-button" id="showMajorTaskForm" type="button" style="margin-top: 8px;"
         onClick='showMajorTaskForm()'>リストを追加</button>
-      <div class="" id="majorTaskForm" style='display: none;'>
+      <div id="majorTaskForm" style='display: none;'>
         <%= form_for @major_task, url: user_major_tasks_path(@user), remote: true do |form| %>
           <%= form.text_area :text, placeholder: '大タスク', class: "sub-task-text-input", rows: "3" %>
           <div class="sub-task-option-field">
@@ -62,16 +62,7 @@
   <% end %>
 </div>
 
-<p><a id="modal-open" class="button-link">クリックするとモーダルウィンドウを開きます。</a></p>
-
 <script> 
-  function showDetailTaskModal(detail) {
-    console.log(detail)
-    // $('#modal-content').css({'top':e.clientY + 'px','left':e.clientX + 'px'});
-    // $("#modal-content").fadeIn();
-    // return false;
-  }
-
   $(".detail-task-modal-syncer").click(function(e){  
     let target = $(this).data('modal-link');
     $('#detail-task-modal-content').css({'top':e.clientY + 'px','left':e.clientX + 'px'});

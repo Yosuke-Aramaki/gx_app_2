@@ -1,0 +1,16 @@
+<li>
+  <div class="detail-task-item">
+    <div class="detail-task-name">
+      ・<%= detail_task_day.text %>
+    </div>
+    <div class="detail-task-summery">
+      <% if detail_task_day.time_duration.nil? %>
+        <%= form_for :detail_task, url: sub_task_detail_task_path(detail_task_day.sub_task_id, id: detail_task_day.id), method: "PUT" do |form| %>
+          <span><%= form.number_field :time_duration, placeholder: '時間', class: "done-task-time-input" %>hr<span>
+        <% end %>
+      <% else %>
+        <span><%= detail_task_day.time_duration %> hr<span>
+      <% end %>
+    </div>
+  </div>
+</li>
