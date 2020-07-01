@@ -16,7 +16,7 @@
     </div>
   </div>
   <div id=sub-task-list-<%= major_task.id %>>
-    <%= render partial: 'sub_tasks/sub_task_section', collection: MajorTask.find(major_task.id).sub_tasks.where("start_date >= ?", Date.today), as: :sub_task %>
+    <%= render partial: 'sub_tasks/sub_task_section', collection: MajorTask.find(major_task.id).sub_tasks.where("start_date <= ? OR end_date >= ? OR end_date is NULL ", Date.today, Date.today), as: :sub_task %>
   </div>
   <button class="show-sub-task-button" id="showSubTaskForm<%= major_task.id%>" type="button"
     onClick='showSubTaskForm(<%= major_task.id %>)'>タスクを追加</button>
