@@ -1,6 +1,11 @@
-<div class="sub-task-box-day">
-  <div class="sub-task-title">
-    <%= sub_task_today.text %>
+<div class="sub-task-box" id=sub-task-box-<%= sub_task_today.id %>>
+  <div class="sub-task-box-header">
+    <div class="sub-task-title">
+      <%= sub_task_today.text %>
+    </div>
+    <div data-modal-link="<%= sub_task_today.id %>" id="sub-task-modal-button-<%= sub_task_today.id %>" class="sub-task-modal-syncer">
+      <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+    </div>
   </div>
   <ul id=detail-task-list-today-<%= sub_task_today.id %>>
     <% SubTask.find(sub_task_today.id).detail_tasks.where("date = ?", Date.today ).each do |detail_task_day| %>
