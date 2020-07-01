@@ -1,7 +1,12 @@
 <div id=sub-task-list-<%= sub_task.major_task_id %>>
   <div class="sub-task-box">
-    <div class="sub-task-title">
-      <%= sub_task.text %>
+    <div class="sub-task-box-header">
+      <div class="sub-task-title">
+        <%= sub_task.text %>
+      </div>
+      <div data-modal-link="<%= sub_task.id %>" id="sub-task-modal-button-<%= sub_task.id %>" class="sub-task-modal-syncer">
+        <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+      </div>
     </div>
     <div class="sub-task-box-summary">
       <% if !sub_task.time_duration.nil? %>

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   end
 
   resources :sub_tasks do
+    get :sub_task_modal, on: :member
     resources :detail_tasks
   end
 

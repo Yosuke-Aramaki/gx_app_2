@@ -51,13 +51,25 @@
   </div>
 <% end %>
 
-<div id="detail-task-modal-section" class='detail-task-modal-content'>
-  <div class="modal-option" >
+<div id="sub-task-modal-section" class='modal-content'>
+  <div class="modal-option" id="sub-task-modal-option">
     <%= link_to(detail_task_path(id: 1), method: :delete, data: { confirm: 'Sure' }, class: "delete-link") do %>
       <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
     <% end %>
     <div style="width: 15px;"></div>
-    <i id="modal-close" class="fa fa-times fa-lg" aria-hidden="true"></i>
+    <i id="sub-task-modal-close" class="fa fa-times fa-lg" aria-hidden="true"></i>
+  </div>
+  <div id="sub-task-modal-content">
+  </div>
+</div>
+
+<div id="detail-task-modal-section" class='modal-content'>
+  <div class="modal-option" id="detail-task-modal-option" >
+    <%= link_to(detail_task_path(id: 1), method: :delete, data: { confirm: 'Sure' }, class: "delete-link") do %>
+      <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+    <% end %>
+    <div style="width: 15px;"></div>
+    <i id="detail-task-modal-close" class="fa fa-times fa-lg" aria-hidden="true"></i>
   </div>
   <div id="detail-task-modal-content">
   </div>
@@ -67,8 +79,7 @@
   $(".detail-task-modal-syncer").click(function(e){  
     let target = $(this).data('modal-link');
     $('#detail-task-modal-section').css({'top':e.clientY + 'px','left':e.clientX + 'px'});
-    $('.modal-option a').attr('href', "/detail_tasks/" + target )   
-    // $("#detail-task-title").text($('#' + target + ' .detail-task-name').text())
+    $('#detail-task-modal-option a').attr('href', "/detail_tasks/" + target )   
     $.ajax({
       url: '/detail_tasks/'+ target +'/detail_task_modal',
       type: 'GET',
@@ -76,16 +87,32 @@
         id: target
       },
     })
-    .done(function(response){
-    })
-    .fail(function(xhr){
-    });
     $("#detail-task-modal-section").fadeIn();
     return false;
   });
   
-  $("#modal-close").unbind().click(function(){
+  $("#detail-task-modal-close").unbind().click(function(){
     $(this).parents("#detail-task-modal-section").fadeOut();
+    return false;
+  }); 
+
+  $(".sub-task-modal-syncer").click(function(e){  
+    let target = $(this).data('modal-link');
+    $('#sub-task-modal-section').css({'top':e.clientY + 'px','left':e.clientX + 'px'});
+    $('#sub-task-modal-option a').attr('href', "/sub_tasks/" + target )  
+    $.ajax({
+      url: '/sub_tasks/'+ target +'/sub_task_modal',
+      type: 'GET',
+      data: {
+        id: target
+      },
+    })
+    $("#sub-task-modal-section").fadeIn();
+    return false;
+  });
+  
+  $("#sub-task-modal-close").unbind().click(function(){
+    $(this).parents("#sub-task-modal-section").fadeOut();
     return false;
   }); 
 

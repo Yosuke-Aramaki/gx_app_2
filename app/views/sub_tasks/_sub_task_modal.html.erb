@@ -1,0 +1,11 @@
+<%= form_for :sub_task, url: major_task_sub_task_path(sub_task.major_task_id, id: sub_task.id), method: "PUT", remote: true do |form| %>
+  <%= form.text_field :text, placeholder: sub_task.text, class: "modal-text" %>
+  <div class="text-border"></div>
+  <div>
+    <%= form.date_field :start_date, class: "modal-date" %>
+    <%= form.date_field :end_date, class: "modal-date" %>
+  </div>
+  <div class="modal-button-section">
+    <%= form.submit "更新", class: "modal-button" %>
+  </div>
+<% end %>

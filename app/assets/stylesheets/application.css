@@ -206,7 +206,13 @@ body {
   box-shadow: 2px 2px 1px #999999;
 }
 
+.sub-task-box-header {
+  display: flex;
+  justify-content: space-between;
+}
+
 .sub-task-title {
+  width: 230px;
   font-size: 14px;
   font-weight: 500;
 }
@@ -419,7 +425,7 @@ li {
 
 /* ============== modal task ================= */
 
-.detail-task-modal-content{
+.modal-content{
   display: none;
 	width: 250px;
 	margin: 1.5em auto 0;

@@ -36,6 +36,35 @@ class SubTasksController < ApplicationController
     end
   end
 
+  def update
+    # render plain: params.inspect
+    @sub_task = SubTask.find(params[:id])
+    @major_task = MajorTask.find(@sub_task.major_task_id)
+    if (@major_task.start_date > @sub_task.start_date && @major_task.end_date < @sub_task.end_date)
+      @major_task.update(start_date: @sub_task.start_date, end_date: @sub_task.end_date)
+    elsif @major_task.start_date > @sub_task.start_date
+      @major_task.update(start_date: @sub_task.start_date)
+    elsif @major_task.end_date < @sub_task.end_date
+      @major_task.update(end_date: @sub_task.end_date)
+    else
+    end
+    if @sub_task.update(sub_task_params)
+      respond_to do |format|
+        format.js
+        format.html { redirect_to root_path }
+      end
+    end
+  end
+
+  def sub_task_modal
+    # render plain: params[:id].inspect
+    @sub_task = SubTask.find(params[:id])
+    respond_to do |format|
+      format.js
+      format.html { redirect_to root_path }
+    end
+  end
+
   private
   def sub_task_params
     params.require(:sub_task).permit(:text, :start_date, :end_date, :time_duration)
