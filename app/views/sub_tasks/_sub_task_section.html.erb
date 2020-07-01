@@ -1,5 +1,5 @@
 <div id=sub-task-list-<%= sub_task.major_task_id %>>
-  <div class="sub-task-box">
+  <div class="sub-task-box" id=sub-task-box-<%= sub_task.id %>>
     <div class="sub-task-box-header">
       <div class="sub-task-title">
         <%= sub_task.text %>
@@ -13,10 +13,10 @@
         <%= sub_task.time_duration %>hr
       <% end %>
       <% if !sub_task.start_date.nil? %>
-        <%= sub_task.start_date.year %>/<%= sub_task.start_date.month %>/<%= sub_task.start_date.mday %> ~ 
+        <span id="start-date"><%= sub_task.start_date.year %>/<%= sub_task.start_date.month %>/<%= sub_task.start_date.mday %> ~ </span>
       <% end %>
       <% if !sub_task.end_date.nil? %>
-        <%= sub_task.end_date.year %>/<%= sub_task.end_date.month %>/<%= sub_task.end_date.mday %>
+        <span id="end-date"><%= sub_task.end_date.year %>/<%= sub_task.end_date.month %>/<%= sub_task.end_date.mday %></span>
       <% end %>
     </div>
     <div class="detail-task-box">

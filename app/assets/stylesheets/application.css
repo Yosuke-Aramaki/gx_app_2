@@ -427,7 +427,7 @@ li {
 
 .modal-content{
   display: none;
-	width: 250px;
+	width: 270px;
 	margin: 1.5em auto 0;
   padding: 10px 20px;
   border-radius: 8px;
@@ -454,11 +454,11 @@ li {
   border: 0;
   outline: 0;
   font-size: 22px;
-  width: 220px;
+  width: 270px;
 }
 
 .text-border {
-  width: 220px;
+  width: 270px;
   height: 1px;
   background: #d1d5db;
   transform-origin: center center;
@@ -478,12 +478,12 @@ li {
   margin-top: 8px;
   border: 0;
   outline: 0;
-  width: 120px;
+  width: 123.9px;
   border-bottom: 1px solid #d1d5db;
 }
 
 .modal-button-section {
-  margin-top: 8px;
+  margin-top: 15px;
   display: flex;
   justify-content: flex-end;
 }
