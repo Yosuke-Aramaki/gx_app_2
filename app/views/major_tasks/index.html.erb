@@ -54,9 +54,10 @@
 <div id="detail-task-modal-section" class='detail-task-modal-content'>
   <div class="modal-option" >
     <%= link_to(detail_task_path(id: 1), method: :delete, data: { confirm: 'Sure' }, class: "delete-link") do %>
-      <i class="fa fa-trash" aria-hidden="true"></i>
+      <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
     <% end %>
-    <i id="modal-close" class="fa fa-times" aria-hidden="true"></i>
+    <div style="width: 15px;"></div>
+    <i id="modal-close" class="fa fa-times fa-lg" aria-hidden="true"></i>
   </div>
   <div id="detail-task-modal-content">
   </div>
