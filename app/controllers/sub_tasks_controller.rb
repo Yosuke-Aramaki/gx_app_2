@@ -59,6 +59,10 @@ class SubTasksController < ApplicationController
   def destroy
     @sub_task = SubTask.find(params[:id])
     @sub_task.destroy
+    respond_to do |format|
+      format.js
+      format.html { redirect_to posts_path }
+    end
   end
 
   def sub_task_modal
