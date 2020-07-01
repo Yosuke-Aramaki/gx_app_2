@@ -1,4 +1,4 @@
-<div class="task-box">
+<div class="task-box" id=task-box-<%= major_task %>>
   <div class="task-box-header">
     <div class="major-task-name">
       <%= major_task.text %>
@@ -15,11 +15,13 @@
       <% end %>
     </div>
   </div>
-  <%= render partial: 'sub_tasks/sub_task_section', collection: MajorTask.find(major_task.id).sub_tasks.where("start_date >= ?", Date.today), as: :sub_task %>
+  <div id=sub-task-list-<%= major_task.id %>>
+    <%= render partial: 'sub_tasks/sub_task_section', collection: MajorTask.find(major_task.id).sub_tasks.where("start_date >= ?", Date.today), as: :sub_task %>
+  </div>
   <button class="show-sub-task-button" id="showSubTaskForm<%= major_task.id%>" type="button"
     onClick='showSubTaskForm(<%= major_task.id %>)'>タスクを追加</button>
   <div id='subTaskForm<%= major_task.id %>' style='display: none;'>
-    <%= form_for ([MajorTask.find(major_task.id), MajorTask.find(major_task.id).sub_tasks.build]) do |form| %>
+    <%= form_for ([MajorTask.find(major_task.id), MajorTask.find(major_task.id).sub_tasks.build]), remote: true do |form| %>
       <%= form.text_area :text, placeholder: '中タスク', class: "sub-task-text-input", rows: "3" %>
       <div class="sub-task-option-field">
         <div><%= form.date_field :start_date, class: "sub-task-date-input" %></div>

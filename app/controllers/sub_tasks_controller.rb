@@ -56,6 +56,11 @@ class SubTasksController < ApplicationController
     end
   end
 
+  def destroy
+    @sub_task = SubTask.find(params[:id])
+    @sub_task.destroy
+  end
+
   def sub_task_modal
     # render plain: params[:id].inspect
     @sub_task = SubTask.find(params[:id])

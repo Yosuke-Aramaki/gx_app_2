@@ -26,6 +26,11 @@ class MajorTasksController < ApplicationController
     end
   end
 
+  def destroy
+    @major_task = MajorTask.find(params[:id])
+    @major_task.destroy
+  end
+
   private
   def major_task_params
     params.require(:major_task).permit(:text, :start_date, :end_date, :time_duration)

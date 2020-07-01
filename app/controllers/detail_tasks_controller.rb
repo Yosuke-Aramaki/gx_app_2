@@ -55,6 +55,10 @@ class DetailTasksController < ApplicationController
   def destroy
     @detail_task = DetailTask.find(params[:id])
     @detail_task.destroy
+    respond_to do |format|
+      format.js
+      format.html { redirect_to posts_path }
+    end
   end
 
   def detail_task_modal
