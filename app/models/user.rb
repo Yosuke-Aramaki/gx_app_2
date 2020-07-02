@@ -6,4 +6,5 @@ class User < ApplicationRecord
   validates :password, presence: true
   has_many :major_tasks
   has_many :sub_tasks
+  has_many :detail_tasks
 end

@@ -31,6 +31,11 @@ class MajorTasksController < ApplicationController
     @major_task.destroy
   end
 
+  def get_task_list_for_specific_period
+    @user = current_user
+    @major_task = @user.major_task.where("start_date <= ? OR end_date >= ?", params[:], params[:]).order(:major_task_id)
+  end
+
   private
   def major_task_params
     params.require(:major_task).permit(:text, :start_date, :end_date, :time_duration)

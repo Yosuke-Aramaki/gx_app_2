@@ -7,6 +7,7 @@ class DetailTasksController < ApplicationController
   def create 
     @detail_task = DetailTask.new(detail_task_params)
     @detail_task.sub_task_id = params[:sub_task_id]
+    @detail_task.user_id = current_user.id
     @sub_task = SubTask.find(params[:sub_task_id])
     @major_task = MajorTask.find(@sub_task.major_task_id)
     if @sub_task.time_duration.nil? 
