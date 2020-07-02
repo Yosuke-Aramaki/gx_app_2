@@ -154,7 +154,7 @@ body {
 /* ============== task list ================= */
 
 .task-list-layout {
-  margin: 20px 0px;
+  margin: 10px 0px;
   scroll-padding-right: 25px;
   display: flex;
   overflow-x: auto;
@@ -427,8 +427,9 @@ li {
 
 .modal-content{
   display: none;
-	width: 270px;
-	margin: 1.5em auto 0;
+  width: 270px;
+  margin-top: -40px;
+  margin-left: 15px;
   padding: 10px 20px;
   border-radius: 8px;
 	border: 1px solid #aaa;
@@ -501,24 +502,27 @@ li {
 /* ============== tab ================= */
 
 .tab-buttons{
-  display:inline-block;
-  width:100%;
-  border-bottom:2px solid #666;
+  margin-top: 10px;
+  margin-left: 25px;
+  display: inline-block;
 }
 
-.tab-buttons>span{
-  display:block;
-  float:left;
+.tab-buttons > span {
+  display: block;
+  float: left;
+  margin-right: 8px;
   cursor:pointer;
-  color:#666;
-  background:#ddd;
-  padding:0 15px;
-  line-height:40px !important;
+  color: #9b9b9b;
+  padding: 0 15px;
+  line-height: 40px !important;
+}
+
+.tab-buttons > span:hover{
+  color: #47B931;
+  border-bottom: 1px solid #47B931;
 }
 
 .tab-buttons>span.is-active{
-  background:#666;
-  color:#ddd;
-  position:relative;
-  box-shadow:0 0 10px rgba(0,0,0,0.5);
+  color: #47B931;
+  border-bottom: 1px solid #47B931;
 }
