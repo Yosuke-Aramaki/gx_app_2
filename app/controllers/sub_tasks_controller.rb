@@ -40,14 +40,23 @@ class SubTasksController < ApplicationController
     # render plain: params.inspect
     @sub_task = SubTask.find(params[:id])
     @major_task = MajorTask.find(@sub_task.major_task_id)
-    if (@major_task.start_date > @sub_task.start_date && @major_task.end_date < @sub_task.end_date)
-      @major_task.update(start_date: @sub_task.start_date, end_date: @sub_task.end_date)
-    elsif @major_task.start_date > @sub_task.start_date
-      @major_task.update(start_date: @sub_task.start_date)
-    elsif @major_task.end_date < @sub_task.end_date
-      @major_task.update(end_date: @sub_task.end_date)
-    else
-    end
+    if @sub_task.end_date.nil?
+      if !params[:sub_task][:end_date] && !@major_task.end_date.nil? && (@major_task.end_date < @sub_task.end_date)
+        @major_task.update(end_date: @sub_task.end_date)
+      end
+      if @major_task.start_date > @sub_task.start_date
+        @major_task.update(end_date: @sub_task.end_date)
+      end
+    else 
+      if (@major_task.start_date > @sub_task.start_date && @major_task.end_date < @sub_task.end_date)
+        @major_task.update(start_date: @sub_task.start_date, end_date: @sub_task.end_date)
+      elsif @major_task.start_date > @sub_task.start_date
+        @major_task.update(start_date: @sub_task.start_date)
+      elsif @major_task.end_date < @sub_task.end_date
+        @major_task.update(end_date: @sub_task.end_date)
+      else
+      end
+    end 
     if @sub_task.update(sub_task_params)
       respond_to do |format|
         format.js

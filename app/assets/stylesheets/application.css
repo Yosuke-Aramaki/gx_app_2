@@ -154,7 +154,7 @@ body {
 /* ============== task list ================= */
 
 .task-list-layout {
-  margin: 50px 0px;
+  margin: 20px 0px;
   scroll-padding-right: 25px;
   display: flex;
   overflow-x: auto;
@@ -496,4 +496,29 @@ li {
   border: 0;
   border-radius: 4px;
   cursor: pointer;
+}
+
+/* ============== tab ================= */
+
+.tab-buttons{
+  display:inline-block;
+  width:100%;
+  border-bottom:2px solid #666;
+}
+
+.tab-buttons>span{
+  display:block;
+  float:left;
+  cursor:pointer;
+  color:#666;
+  background:#ddd;
+  padding:0 15px;
+  line-height:40px !important;
+}
+
+.tab-buttons>span.is-active{
+  background:#666;
+  color:#ddd;
+  position:relative;
+  box-shadow:0 0 10px rgba(0,0,0,0.5);
 }
