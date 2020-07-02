@@ -13,8 +13,11 @@ class SubTasksController < ApplicationController
     if @sub_task.start_date.nil?
       @sub_task.start_date = Date.today
       if @major_task.start_date.nil?
-        @major_task.start_date = @sub_task.start_date
-        @major_task.save      
+        @major_task.update(start_date: @sub_task.start_date)      
+      end
+    elsif @sub_task.end_date.nil?
+      if !@major_task.start_date.nil? && @major_task.start_date > @sub_task.start_date
+        @major_task.update(start_date: @sub_task.start_date)  
       end
     elsif @major_task.start_date.nil? || @major_task.end_date.nil? || (@major_task.start_date > @sub_task.start_date && @major_task.end_date < @sub_task.end_date)
       @major_task.start_date = @sub_task.start_date
