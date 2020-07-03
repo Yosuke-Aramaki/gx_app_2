@@ -3,10 +3,12 @@
   <span class="tab_button">日別のタスク</span>
 </div>
 <div class="filter-button" style="display: none;">
-  <%= form_for :detail_task, url: get_task_list_for_specific_period_user_path(@user), method: :get, remote: true do |form| %>
-    <%= form.date_field :start_date, class: "date-input" %> 〜 
-    <%= form.date_field :end_date, class: "date-input" %>
-    <%= form.submit "実行", class: "add-task-button" %>
+  <% if logged_in? %>
+    <%= form_for :detail_task, url: get_task_list_for_specific_period_user_path(@user), method: :get, remote: true do |form| %>
+      <%= form.date_field :start_date, class: "date-input" %> 〜 
+      <%= form.date_field :end_date, class: "date-input" %>
+      <%= form.submit "実行", class: "add-task-button" %>
+    <% end %>
   <% end %>
 </div>
 <div class="content">
