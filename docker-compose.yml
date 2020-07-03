@@ -1,0 +1,10 @@
+version: '2'
+services:
+  db:
+    image: mysql:8.0.19
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      TZ: Asia/Tokyo
