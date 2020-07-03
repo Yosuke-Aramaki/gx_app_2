@@ -135,7 +135,7 @@ body {
   border: 0;      
   cursor: pointer;
   padding: auto 18px;
-  background: #AEDA49;
+  background: #47B931;
   color: #ffffff;
   transition: .2s;
   /* box-shadow: 6px 6px 3px #666666;   */
@@ -277,14 +277,20 @@ li {
   font-size: 12px;
   text-align: center;
   cursor: pointer;
-  padding: 5px 18px;
-  background: #AEDA49;
-  color: #000000;
+  padding: 5px 20px;
+  background: #47B931;
+  color: #ffffff;
   transition: .3s;
   line-height: 1em; 
+  border: 0;
   /* box-shadow: 6px 6px 3px #666666;   */
   /* border: 2px solid #ffffff;  */
 }
+
+.add-task-button:hover {
+  background: #65C153;
+}
+
 
 .show-sub-task-button {
   width: 270px;
@@ -490,13 +496,17 @@ li {
 }
 
 .modal-button {
-  background: #FFCE1D;
+  background: #47B931;
   color: #ffffff;
   height: 26px;
   width: 50px;
   border: 0;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.modal-button:hover {
+  background: #65C153;
 }
 
 /* ============== tab ================= */
@@ -518,8 +528,7 @@ li {
 }
 
 .tab-buttons > span:hover{
-  color: #47B931;
-  border-bottom: 1px solid #47B931;
+  color: #7BC86C;
 }
 
 .tab-buttons>span.is-active{

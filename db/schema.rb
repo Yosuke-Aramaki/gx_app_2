@@ -17,9 +17,11 @@ ActiveRecord::Schema.define(version: 2020_06_12_001108) do
     t.date "date"
     t.float "time_duration"
     t.bigint "sub_task_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["sub_task_id"], name: "index_detail_tasks_on_sub_task_id"
+    t.index ["user_id"], name: "index_detail_tasks_on_user_id"
   end
 
   create_table "major_tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -55,6 +57,7 @@ ActiveRecord::Schema.define(version: 2020_06_12_001108) do
   end
 
   add_foreign_key "detail_tasks", "sub_tasks"
+  add_foreign_key "detail_tasks", "users"
   add_foreign_key "major_tasks", "users"
   add_foreign_key "sub_tasks", "major_tasks"
   add_foreign_key "sub_tasks", "users"

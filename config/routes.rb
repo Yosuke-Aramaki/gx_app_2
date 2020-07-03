@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
 
   resources :users do
+    get :get_task_list_for_specific_period, on: :member
     resources :major_tasks
   end
 
