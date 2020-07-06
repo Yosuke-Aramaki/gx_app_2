@@ -34,7 +34,7 @@
       <div>
         <div style="vertical-align : top;">
           <%= form.text_area :text, placeholder: 'やったこと', class: "done-task-text-input", rows: "2" %>
-          <%= form.number_field :time_duration, placeholder: '時間', class: 'done-task-time-input' %><span class="done-task-time-unit">hr</span>
+          <%= form.number_field :time_duration, placeholder: '時間', step: "0.1", class: 'done-task-time-input' %><span class="done-task-time-unit">hr</span>
           <%= form.date_field :date, value: Date.today, class: "hide" %>
         </div>
         <div class="sub-task-button-field">

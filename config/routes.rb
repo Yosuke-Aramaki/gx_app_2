@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :users do
     get :get_task_list_for_specific_period, on: :member
     resources :major_tasks
+    resources :day_task_summaries
   end
 
   resources :major_tasks do

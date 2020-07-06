@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_12_001108) do
+ActiveRecord::Schema.define(version: 2020_07_03_093201) do
+
+  create_table "day_task_summeries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.text "text"
+    t.date "date"
+    t.integer "number_of_task"
+    t.float "time"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_day_task_summeries_on_user_id"
+  end
 
   create_table "detail_tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "text"
@@ -56,6 +67,7 @@ ActiveRecord::Schema.define(version: 2020_06_12_001108) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "day_task_summeries", "users"
   add_foreign_key "detail_tasks", "sub_tasks"
   add_foreign_key "detail_tasks", "users"
   add_foreign_key "major_tasks", "users"

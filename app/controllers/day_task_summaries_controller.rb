@@ -1,0 +1,2 @@
+class DayTaskSummariesController < ApplicationController
+end
