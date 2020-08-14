@@ -65,7 +65,7 @@ production:
 
 ```
 //dockerのアプリを起動した状態で
-$ docker-compose -up d
+$ docker-compose up -d
 
 // DBに接続
 $ mysql -u root -h 127.0.0.1
