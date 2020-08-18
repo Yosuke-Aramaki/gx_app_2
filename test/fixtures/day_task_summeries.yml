@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  text: MyText
+  date: 2020-07-03
+  number_of_task: 1
+  time: 1.5
+  user: one
+
+two:
+  text: MyText
+  date: 2020-07-03
+  number_of_task: 1
+  time: 1.5
+  user: two

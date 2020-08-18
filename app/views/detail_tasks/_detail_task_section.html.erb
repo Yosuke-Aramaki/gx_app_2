@@ -1,0 +1,17 @@
+<li>
+  <div data-modal-link="<%= detail_task.sub_task_id %>-<%= detail_task.id %>" id="modal-<%= detail_task.id %>" class="detail-task-item detail-task-modal-syncer">
+    <div class="detail-task-name">
+      ・<%= detail_task.text %>
+    </div>
+    <div class="detail-task-summery">
+      <span class="detail-task-summery-item">
+        <% if !detail_task.time_duration.nil? %>
+          <%= detail_task.time_duration %>hr 
+        <% end %>
+        <% if !detail_task.date.nil? %>
+          <%= detail_task.date.month %>/<%= detail_task.date.mday %>
+        <% end %>
+      <span>
+    </div>
+  </div>
+</li>

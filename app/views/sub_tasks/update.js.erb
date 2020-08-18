@@ -1,0 +1,4 @@
+$('#sub-task-box-' + <%= @sub_task.id %> + ' .sub-task-box-header .sub-task-title').text('<%= SubTask.find(@sub_task.id).text %>')
+$('#sub-task-box-' + <%= @sub_task.id %> + ' .sub-task-box-summary #start-date').text('<%= @sub_task.start_date %>')
+$('#sub-task-box-' + <%= @sub_task.id %> + ' .sub-task-box-summary #end-date').text('<%= @sub_task.end_date %>')
+$("#sub-task-modal-section").fadeOut();

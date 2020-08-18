@@ -1,0 +1,5 @@
+$("#task-list").append("<%= escape_javascript(render partial: 'major_task_section', locals: { major_task: @major_task }) %>");
+$('#new_major_task')[0].reset();
+document.getElementById('majorTaskForm').style.display = 'none';
+document.getElementById('showMajorTaskForm').style.display = 'inline-block';
+document.getElementById('hideMajorTaskForm').style.display = 'none';

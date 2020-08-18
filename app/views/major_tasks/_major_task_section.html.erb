@@ -1,0 +1,38 @@
+<div class="task-box" id=task-box-<%= major_task.id %>>
+  <div class="task-box-header">
+    <div class="major-task-name">
+      <%= major_task.text %>
+    </div>
+    <div class="major-task-box-summary">
+      <% if !major_task.time_duration.nil? %>
+        <%= major_task.time_duration %>hr
+      <% end %>
+      <% if !major_task.start_date.nil? %>
+        <%= major_task.start_date.year %>/<%= major_task.start_date.month %>/<%= major_task.start_date.mday %> ~ 
+      <% end %>
+      <% if !major_task.end_date.nil? %>
+        <%= major_task.end_date.year %>/<%= major_task.end_date.month %>/<%= major_task.end_date.mday %>
+      <% end %>
+    </div>
+  </div>
+  <div id=sub-task-list-<%= major_task.id %>>
+    <%= render partial: 'sub_tasks/sub_task_section', collection: MajorTask.find(major_task.id).sub_tasks.where("start_date <= ? OR end_date >= ? OR end_date is NULL ", Date.today, Date.today), as: :sub_task %>
+  </div>
+  <button class="show-sub-task-button" id="showSubTaskForm<%= major_task.id%>" type="button"
+    onClick='showSubTaskForm(<%= major_task.id %>)'>タスクを追加</button>
+  <div id='subTaskForm<%= major_task.id %>' style='display: none;'>
+    <%= form_for ([MajorTask.find(major_task.id), MajorTask.find(major_task.id).sub_tasks.build]), remote: true do |form| %>
+      <%= form.text_area :text, placeholder: '中タスク', class: "sub-task-text-input", rows: "3" %>
+      <div class="sub-task-option-field">
+        <div><%= form.date_field :start_date, class: "sub-task-date-input" %></div>
+        <div>~</div>
+        <div><%= form.date_field :end_date, class: "sub-task-date-input" %></div>
+      </div>
+      <div class="sub-task-button-field">
+        <button class="hide_button" id="hideSubTaskForm<%= major_task.id %>" style="display: none;" type="button"
+          onClick='hideSubTask(<%= major_task.id %>)'>✖️</button>
+        <%= form.submit "追加", class: "add-task-button" %>
+      </div>
+    <% end %>
+  </div>
+</div>

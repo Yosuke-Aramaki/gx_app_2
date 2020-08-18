@@ -1,0 +1,48 @@
+<div class="sub-task-box sub-task-box-<%= sub_task_today.id %>" id=sub-task-box-<%= sub_task_today.id %>>
+  <div class="sub-task-box-header">
+    <div class="sub-task-title">
+      <%= sub_task_today.text %>
+    </div>
+    <div data-modal-link="<%= sub_task_today.id %>" id="sub-task-modal-button-<%= sub_task_today.id %>" class="sub-task-modal-syncer">
+      <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+    </div>
+  </div>
+  <ul id=detail-task-list-today-<%= sub_task_today.id %>>
+    <% SubTask.find(sub_task_today.id).detail_tasks.where("date = ?", Date.today ).each do |detail_task_day| %>
+      <li>
+        <div data-modal-link="<%= detail_task_day.id %>" id="detail-task-item-<%= detail_task_day.id %>" class="detail-task-item detail-task-modal-syncer">
+          <div class="detail-task-name">
+            ・<%= detail_task_day.text %>
+          </div>
+          <div class="detail-task-summery">
+            <% if detail_task_day.time_duration.nil? %>
+              <%= form_for :detail_task, url: sub_task_detail_task_path(sub_task_today.id, id: detail_task_day.id), method: "PUT" do |form| %>
+                <span><%= form.number_field :time_duration, placeholder: '時間', class: "done-task-time-input" %>hr<span>
+              <% end %>
+            <% else %>
+              <span><%= detail_task_day.time_duration %> hr<span>
+            <% end %>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+  <input class="add-done-task-button" id="showDetailTaskFormDayButton<%= sub_task_today.id %>" type="button" value="+ 今日やったこと"
+    onClick='showDetailTaskFormDay(<%= sub_task_today.id %>)'>
+  <div id='detailTaskFormDay<%= sub_task_today.id %>' style='display: none;'>
+    <%= form_for ([SubTask.find(sub_task_today.id), SubTask.find(sub_task_today.id).detail_tasks.build]), remote: true do |form| %>
+      <div>
+        <div style="vertical-align : top;">
+          <%= form.text_area :text, placeholder: 'やったこと', class: "done-task-text-input", rows: "2" %>
+          <%= form.number_field :time_duration, placeholder: '時間', step: "0.01", class: 'done-task-time-input' %><span class="done-task-time-unit">hr</span>
+          <%= form.date_field :date, value: Date.today, class: "hide" %>
+        </div>
+        <div class="sub-task-button-field">
+          <input class="hide_button" id="hideDetailTaskFormDayButton<%= sub_task_today.id %>" type="button" value="✖️"
+            onClick='hideDetailTaskFormDay(<%= sub_task_today.id %>)'>
+          <%= form.submit "追加", class: "add-task-button" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

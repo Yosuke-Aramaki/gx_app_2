@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>GxApp2</title>
+    <title>Pilee</title>
+    <link rel="pilee icon" href="/assets/logo.ico">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <div class="top-header">
+      <div class="logo-header">
+        <%= link_to image_tag("logo-name.png", class: "logo"), "/" %>
+      </div>
+      <div class="contents-header">
+        <% if logged_in? %>
+          <%= link_to "ログアウト", logout_path, method: :delete, class: 'session-button' %>
+          <%= link_to current_user.name.slice(0, 1), user_path(current_user.id), class: 'profile-button' %>
+        <% else %>
+          <div class="button-header">
+            <%= link_to "ユーザー登録", new_user_path, class: 'session-button' %>
+            <%= link_to "ログイン", login_path, class: 'session-button' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </head>
 
   <body>

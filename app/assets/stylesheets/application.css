@@ -10,6 +10,528 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require font-awesome
  *= require_tree .
  *= require_self
  */
+
+body { 
+  margin: 0px;
+  -webkit-text-size-adjust: 100%;
+  background-color: #f9fafc;
+}
+
+/* ==============  header ================= */
+
+.top-header {
+  width: 100%;
+  height: 50px;
+  /* margin: -200% -200% 0 -200%;
+  padding: 200% 200% 0 200%; */
+  background-color: rgba(45,45,45, 0.32);
+  opacity: 0.32;
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo-header {
+  margin: auto 0;
+}
+
+.logo {
+  margin-left: 15px;
+  height: 30px;
+  opacity: 1.0;
+}
+
+.contents-header {
+  display: flex;
+  margin: auto 0;
+}
+
+.session-button {
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 8px;         
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  padding: 8px 12px;
+  background: #ffffff;
+  color: #000000;
+  transition: .3s;
+  line-height: 1em; 
+  /* box-shadow: 6px 6px 3px #666666;   */
+  border: 2px solid #ffffff; 
+  margin-right: 15px;
+}
+
+.profile-button {
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 50%;         
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  padding: 8px 12px;
+  background: #ffffff;
+  color: #000000;
+  transition: .3s;
+  line-height: 1em; 
+  /* box-shadow: 6px 6px 3px #666666;   */
+  border: 2px solid #ffffff; 
+  margin-right: 15px;
+}
+
+/* ==============  create account / login ================= */
+
+.section-field {
+  width: 100%;
+}
+
+.section-logo {
+  margin: 20px 0px;
+  text-align: center;
+}
+
+.box-frame {
+  width: 320px;
+  margin: 0 auto;
+  padding: 25px 40px;
+  text-align: center;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px 0px;
+}
+
+.box-frame-title h2 {
+  margin-top: 4px;
+  margin-bottom: 35px;
+}
+
+.form-field {
+  margin-bottom: 20px;
+}
+
+.form-section {
+  width: 100%;
+  font-size: 13px;
+  height: 40px;
+  padding-left: 8px;
+  background-color: #FAFBFC;
+  border: 2px solid #DFE1E6;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+.form-button {
+  width: 100%;
+  height: 40px;
+  font-size: 14px;
+  font-weight: 600;
+  box-sizing: border-box;
+  display: inline-block;
+  border-radius: 8px;
+  border: 0;      
+  cursor: pointer;
+  padding: auto 18px;
+  background: #47B931;
+  color: #ffffff;
+  transition: .2s;
+  /* box-shadow: 6px 6px 3px #666666;   */
+  /* border: 2px solid #ffffff;  */
+}
+
+.form-button:hover {
+  background: #D9F2A0;
+}
+
+.error {
+  font-size: 12px;
+  color: #FF954A;
+}
+
+/* ============== task list ================= */
+
+.task-list-layout {
+  margin: 10px 0px;
+  scroll-padding-right: 25px;
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.task-list {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.task-box {
+  width: 290px;
+  margin-left: 25px;
+  padding-bottom: 8px;
+  background-color: #F9F7F5;
+  border-top: 10px solid #7BC86C;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px 0px;
+}
+
+.task-box-header {
+  margin: 10px 16px;
+}
+
+.major-task-name {
+  font-size: 15px;
+  font-weight: 600;
+  bottom: 0;
+}
+
+.major-task-box-summary {
+  font-size: 9px;
+  bottom: 0;
+  right: 5px;
+}
+
+#majorTaskForm {
+  display: none;
+}
+
+.sub-task-box {
+  width: 250px;
+  margin: 0px 10px 8px 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 2px 2px 1px #999999;
+}
+
+.sub-task-box-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sub-task-title {
+  width: 230px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.sub-task-box-summary {
+  font-size: 9px;
+  margin-top: 3px;
+  margin-left: 5px;
+}
+
+ul {
+  margin: 8px 0px;
+  padding-inline-start: 5px;
+  list-style: none;
+}
+
+li {
+  font-size: 13px;
+}
+
+.detail-task-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.detail-task-name {
+  width: 180px;
+  cursor: pointer;
+  white-space: initial;
+}
+
+.detail-task-summery {
+  font-size: 9px;
+  padding-top: 4px;
+}
+
+.detail-task-text-input {
+  width: 245px;
+  border-radius: 8px;
+  border: 1px solid gray;
+}
+
+.detail-task-date-input {
+  width: 160px;
+}
+
+.detal-task-option-field {
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.hide_button {
+  cursor: pointer;
+  background-color: transparent;
+  border: 0;
+}
+
+.add-task-button {
+  display: inline-block;
+  border-radius: 8px;         
+  font-size: 12px;
+  text-align: center;
+  cursor: pointer;
+  padding: 5px 20px;
+  background: #47B931;
+  color: #ffffff;
+  transition: .3s;
+  line-height: 1em; 
+  border: 0;
+  /* box-shadow: 6px 6px 3px #666666;   */
+  /* border: 2px solid #ffffff;  */
+}
+
+.add-task-button:hover {
+  background: #65C153;
+}
+
+
+.show-sub-task-button {
+  width: 270px;
+  margin: 0px 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 2px 2px 1px #999999;
+}
+
+.sub-task-text-input {
+  margin: 0px 10px;
+  width: 265px;
+  border-radius: 8px;
+  border: 1px solid gray;
+}
+
+.sub-task-option-field {
+  margin: 0px 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.sub-task-date-input {
+  width: 120px;
+}
+
+.sub-task-button-field {
+  float: right;
+  margin-right: 10px;
+}
+
+.major-task-field {
+  width: 220px;
+  margin: 15px 0px;
+}
+
+.sub-task-field {
+  width: 220px;
+  margin: 10px 0px;
+}
+
+.detail-task-field {
+  width: 220px;
+}
+
+.add_button {
+  font-size: 14px;
+  font-weight: 500;
+  background-color: #E0DFDE;
+  height: 23px;
+  width: 23px;
+  padding: 0px 0px 3px 0px;
+  border: 0px;
+  cursor: pointer;
+  display: block;
+	text-align: center;
+  border-radius: 50%;
+}
+
+.add-major-task-field {
+  width: 290px;
+  margin-left: 25px;
+  padding-bottom: 8px;
+  background-color: #F9F7F5;
+  border-radius: 8px;
+}
+
+
+/* ============== day task ================= */
+
+.day-task-box {
+  width: 290px;
+  margin-right: 25px;
+  padding-bottom: 8px;
+  background-color: #F9F7F5;
+  border-top: 10px solid #7BC86C;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px 0px;
+}
+
+.date-field {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 10px 0px 0px 20px;
+}
+
+.major-task-name-day {
+  margin: 0px 20px;
+  margin-top: 10px;
+}
+
+.sub-task-box-day {
+  width: 250px;
+  margin: 8px 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 2px 2px 1px #999999;
+}
+
+.add-done-task-button {
+  font-size: 11px;
+  background-color: #E0DFDE;
+  padding: 8px 0px;
+  margin: 0px 10px;
+  border: 0px;
+  border-radius: 8px;
+  width: 230px;
+  cursor: pointer;
+  display: block;
+  text-align: center;  
+  transition: .3s;
+  line-height: 1em; 
+  /* box-shadow: 6px 6px 3px #666666;   */
+}
+
+.done-task-text-input {
+  border: 0;
+  width: 190px;
+}
+
+.done-task-time-input {
+  width: 35px;
+  border: 0;
+  vertical-align : top;
+}
+
+.done-task-time-unit {
+  font-size: 11px;
+  vertical-align : top;
+}
+
+.hide {
+  display: none;
+}
+
+/* ============== modal task ================= */
+
+.modal-content{
+  display: none;
+  width: 270px;
+  margin-top: -40px;
+  margin-left: 15px;
+  padding: 10px 20px;
+  border-radius: 8px;
+	border: 1px solid #aaa;
+	background: #fff;
+  z-index: 2;
+  position: fixed;
+}
+
+.modal-option {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.fa {
+  cursor: pointer;
+  color: #5f6368;
+  font-size: 16px;
+}
+
+.modal-text {
+  border: 0;
+  outline: 0;
+  font-size: 22px;
+  width: 270px;
+}
+
+.text-border {
+  width: 270px;
+  height: 1px;
+  background: #d1d5db;
+  transform-origin: center center;
+  transform: scaleX(0);
+  transition: transform 0.18s ease-out;
+}
+
+.input:focus + .underline {
+  transform: scaleX(1);
+}
+
+.modal-text:focus + .text-border {
+  transform: scaleX(1);
+}
+
+.modal-date {
+  margin-top: 8px;
+  border: 0;
+  outline: 0;
+  width: 123.9px;
+  border-bottom: 1px solid #d1d5db;
+}
+
+.modal-button-section {
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-button {
+  background: #47B931;
+  color: #ffffff;
+  height: 26px;
+  width: 50px;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-button:hover {
+  background: #65C153;
+}
+
+/* ============== tab ================= */
+
+.tab-buttons{
+  margin-top: 10px;
+  margin-left: 25px;
+  display: inline-block;
+}
+
+.tab-buttons > span {
+  display: block;
+  float: left;
+  margin-right: 8px;
+  cursor:pointer;
+  color: #9b9b9b;
+  padding: 0 15px;
+  line-height: 40px !important;
+}
+
+.tab-buttons > span:hover{
+  color: #7BC86C;
+}
+
+.tab-buttons>span.is-active{
+  color: #47B931;
+  border-bottom: 1px solid #47B931;
+}

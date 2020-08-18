@@ -1,0 +1,8 @@
+$("#sub-task-list-<%= @sub_task.major_task_id %>").append("<%= escape_javascript(render partial: 'sub_tasks/sub_task_section', locals: { sub_task: @sub_task }) %>");
+<% if @sub_task.start_date == Date.today %>
+  $("#sub-task-list-day-<%= @sub_task.major_task_id %>").append("<%= escape_javascript(render partial: 'sub_tasks/sub_task_section_day', locals: { sub_task_today: @sub_task }) %>");
+<% end %>
+$('#new_sub_task')[0].reset();
+document.getElementById('subTaskForm' + <%= @sub_task.major_task_id %>).style.display = 'none';
+document.getElementById('showSubTaskForm' + <%= @sub_task.major_task_id %>).style.display = 'inline-block';
+document.getElementById('hideSubTaskForm' + <%= @sub_task.major_task_id %>).style.display = 'none';

@@ -1,0 +1,219 @@
+<div class="tab-buttons">
+  <span class="tab_button">タスク一覧</span>
+  <span class="tab_button">日別のタスク</span>
+</div>
+<div class="filter-button" style="display: none;">
+  <% if logged_in? %>
+    <%= form_for :detail_task, url: get_task_list_for_specific_period_user_path(@user), method: :get, remote: true do |form| %>
+      <%= form.date_field :start_date, class: "date-input" %> 〜 
+      <%= form.date_field :end_date, class: "date-input" %>
+      <%= form.submit "実行", class: "add-task-button" %>
+    <% end %>
+  <% end %>
+</div>
+<div class="content">
+  <div class="task-list-layout">
+    <% if logged_in? %>
+      <div id="task-list" class="task-list">
+        <% if @user.major_tasks.any? %>
+          <%= render partial: 'major_tasks/major_task_section', collection: @user.major_tasks, as: :major_task %>
+        <% end %>
+      </div>
+      <div class="add-major-task-field">
+        <button class="show-sub-task-button" id="showMajorTaskForm" type="button" style="margin-top: 8px;"
+          onClick='showMajorTaskForm()'>リストを追加</button>
+        <div id="majorTaskForm" style='display: none;'>
+          <%= form_for @major_task, url: user_major_tasks_path(@user), remote: true do |form| %>
+            <%= form.text_area :text, placeholder: '大タスク', class: "sub-task-text-input", rows: "3" %>
+            <div class="sub-task-option-field">
+              <div><%= form.date_field :start_date, class: "sub-task-date-input" %></div>
+              <div>~</div>
+              <div><%= form.date_field :end_date, class: "sub-task-date-input" %></div>
+            </div>
+            <div class="sub-task-button-field">
+              <%= form.submit "追加", class: "add-task-button" %>
+            </div>
+          <% end %>
+              <button class="hide_button" id="hideMajorTaskForm" style="display: none;" type="button"
+                onClick='hideMajorTaskForm()'>✖️</button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="content">
+  <% if logged_in? %>
+    <div style="margin: 10px 30px;">
+      <div class="day-task-box">
+        <p class="date-field" id="date"></span>
+        <% if @sub_task_list_today.any? %>
+          <% @sub_task_list_today.each_with_index do |sub_task_today, i| %>
+            <% if i > 0 && (@sub_task_list_today[i-1].major_task_id == @sub_task_list_today[i].major_task_id) %>
+              <%= render partial: 'sub_tasks/sub_task_section_day', locals: {sub_task_today: sub_task_today } %>
+            <% else %>
+              <p class="major-task-name-day"><%= MajorTask.find(@sub_task_list_today[i].major_task_id).text %></p>
+              <div id=sub-task-list-day-<%= @sub_task_list_today[i].major_task_id %>>
+                <%= render partial: 'sub_tasks/sub_task_section_day', locals: {sub_task_today: sub_task_today } %>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
+<div id="sub-task-modal-section" class='modal-content'>
+  <div class="modal-option" id="sub-task-modal-option">
+    <%= link_to(detail_task_path(id: 1), method: :delete, data: { confirm: 'Sure' }, class: "delete-link", remote: true) do %>
+      <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+    <% end %>
+    <div style="width: 15px;"></div>
+    <i id="sub-task-modal-close" class="fa fa-times fa-lg" aria-hidden="true"></i>
+  </div>
+  <div id="sub-task-modal-content">
+  </div>
+</div>
+
+<div id="detail-task-modal-section" class='modal-content'>
+  <div class="modal-option" id="detail-task-modal-option" >
+    <%= link_to(detail_task_path(id: 1), method: :delete, data: { confirm: 'Sure' }, class: "delete-link", remote: true) do %>
+      <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+    <% end %>
+    <div style="width: 15px;"></div>
+    <i id="detail-task-modal-close" class="fa fa-times fa-lg" aria-hidden="true"></i>
+  </div>
+  <div id="detail-task-modal-content">
+  </div>
+</div>
+
+<script> 
+  $(".detail-task-modal-syncer").click(function(e){  
+    let target = $(this).data('modal-link');
+    $('#detail-task-modal-section').css({'top':e.clientY + 'px','left':e.clientX + 'px'});
+    $('#detail-task-modal-option a').attr('href', "/detail_tasks/" + target )   
+    $.ajax({
+      url: '/detail_tasks/'+ target +'/detail_task_modal',
+      type: 'GET',
+      data: {
+        id: target
+      },
+    })
+    $("#detail-task-modal-section").fadeIn();
+    return false;
+  });
+  
+  $("#detail-task-modal-close").unbind().click(function(){
+    $(this).parents("#detail-task-modal-section").fadeOut();
+    return false;
+  }); 
+
+  $(".sub-task-modal-syncer").click(function(e){  
+    let target = $(this).data('modal-link');
+    $('#sub-task-modal-section').css({'top':e.clientY + 'px','left':e.clientX + 'px'});
+    $('#sub-task-modal-option a').attr('href', "/sub_tasks/" + target )  
+    $.ajax({
+      url: '/sub_tasks/'+ target +'/sub_task_modal',
+      type: 'GET',
+      data: {
+        id: target
+      },
+    })
+    $("#sub-task-modal-section").fadeIn();
+    return false;
+  });
+  
+  $("#sub-task-modal-close").unbind().click(function(){
+    $(this).parents("#sub-task-modal-section").fadeOut();
+    return false;
+  }); 
+
+  $('.filter-button').click(function(e) {
+    $("#filter-form").fadeIn();
+  })
+
+  var now = new Date();
+  var year = now.getFullYear();
+  var month = now.getMonth()+1; 
+  var date = now.getDate();
+  var day = now.getDay(); 
+
+  document.getElementById("date").innerHTML = getToday() 
+  function getToday() {
+  	var day_of_the_week = new Array("日","月","火","水","木","金","土");
+    var today = month + "/" + date + "日(" + day_of_the_week[day] + ")"; 
+    // for (let i = 1; i <= 2; i++ ) {
+    //   date = date + 1
+    //   document.getElementById("date"+i).innerHTML = month + "/" + date + "日(" + day_of_the_week[day] + ")";
+    // }
+    return today;
+  }
+  
+  function showMajorTaskForm() {
+    document.getElementById('majorTaskForm').style.display = 'inline-block'; 
+    document.getElementById('showMajorTaskForm').style.display = 'none';
+    document.getElementById('hideMajorTaskForm').style.display = 'inline-block';
+  }
+
+  function hideMajorTaskForm() {
+    document.getElementById('majorTaskForm').style.display = 'none';
+    document.getElementById('showMajorTaskForm').style.display = 'inline-block';
+    document.getElementById('hideMajorTaskForm').style.display = 'none';
+  }
+
+  function showSubTaskForm(majorTaskId) {
+    document.getElementById('subTaskForm' + majorTaskId).style.display = 'inline-block'; 
+    document.getElementById('showSubTaskForm' + majorTaskId).style.display = 'none';
+    document.getElementById('hideSubTaskForm' + majorTaskId).style.display = 'inline-block';
+  }
+
+  function hideSubTask(majorTaskId) {
+    document.getElementById('subTaskForm' + majorTaskId).style.display = 'none';
+    document.getElementById('showSubTaskForm' + majorTaskId).style.display = 'inline-block';
+    document.getElementById('hideSubTaskForm' + majorTaskId).style.display = 'none';
+  }
+
+  function showDetailTaskForm(subTaskId) {
+    document.getElementById('detailTaskForm' + subTaskId).style.display = 'inline-block'; 
+    document.getElementById('showDetailTaskForm' + subTaskId).style.display = 'none';
+    document.getElementById('hideDetailTaskForm' + subTaskId).style.display = 'inline-block';
+  }
+
+  function hideDetailTaskForm(subTaskId) {
+    document.getElementById('detailTaskForm' + subTaskId).style.display = 'none';
+    document.getElementById('showDetailTaskForm' + subTaskId).style.display = 'inline-block';
+    document.getElementById('hideDetailTaskForm' + subTaskId).style.display = 'none';
+  }
+
+  function showDetailTaskFormDay(subTaskId) {
+    document.getElementById('detailTaskFormDay' + subTaskId).style.display = 'inline-block'; 
+    document.getElementById('showDetailTaskFormDayButton' + subTaskId).style.display = 'none';
+    document.getElementById('hideDetailTaskFormDayButton' + subTaskId).style.display = 'inline-block';
+  }
+
+  function hideDetailTaskFormDay(subTaskId) {
+    document.getElementById('detailTaskFormDay' + subTaskId).style.display = 'none';
+    document.getElementById('showDetailTaskFormDayButton' + subTaskId).style.display = 'inline-block';
+    document.getElementById('hideDetailTaskFormDayButton' + subTaskId).style.display = 'none';
+  }
+
+$(function () {
+  $('.content').hide();
+  $('.content').eq(0).show();
+  $('.tab_button').eq(0).addClass('is-active');
+
+  $('.tab_button').each(function () {
+    $(this).on('click', function () {
+      var index = $('.tab_button').index(this);
+      $('.tab_button').removeClass('is-active');
+      $(this).addClass('is-active');
+      $('.content').hide();
+      $('.content').eq(index).fadeIn();
+    });
+  });
+});
+
+</script>
+
